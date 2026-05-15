@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CoastalCommandCenter.ViewModels"
+             x:Class="CoastalCommandCenter.Views.StaticCameraPreviewWidget"
+             x:DataType="vm:StaticCameraPreviewViewModel">
+
+  <Border Classes="static-preview-container">
+    <Grid RowDefinitions="Auto,*,Auto">
+      <!-- Header with camera name -->
+      <Border Grid.Row="0" Classes="panel-title-bar">
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <TextBlock Text="{Binding CameraName}" Foreground="{DynamicResource BrushTextTitle}" FontWeight="Bold" />
+          <Border IsVisible="{Binding !IsOnline}"
+                  Background="{DynamicResource BrushDangerSecondary}"
+                  CornerRadius="2"
+                  Padding="4,2">
+            <TextBlock Foreground="{DynamicResource BrushTextWhite}" Text="OFFLINE" FontSize="9" />
+          </Border>
+        </StackPanel>
+      </Border>
+
+      <!-- Snapshot image or error state -->
+      <Grid Grid.Row="1" Background="{DynamicResource BrushWindowBg}">
+        <!-- Image display -->
+        <Image Source="{Binding SnapshotImage}"
+               Stretch="UniformToFill"
+               IsVisible="{Binding SnapshotImage, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+        <!-- Error state -->
+        <StackPanel IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Spacing="8">
+          <TextBlock Text="{Binding ErrorMessage}"
+                     Foreground="{DynamicResource BrushTextDim}"
+                     HorizontalAlignment="Center"
+                     FontSize="11" />
+        </StackPanel>
+
+        <!-- Loading indicator -->
+        <TextBlock IsVisible="{Binding IsLoading}"
+                   Text="Loading..."
+                   Foreground="{DynamicResource BrushTextDim}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="11" />
+
+        <!-- Placeholder when no image yet -->
+        <TextBlock IsVisible="{Binding SnapshotImage, Converter={x:Static ObjectConverters.IsNull}}"
+                   Text="No snapshot"
+                   Foreground="{DynamicResource BrushTextDim}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="11" />
+      </Grid>
+
+      <!-- Footer with timestamp -->
+      <Border Grid.Row="2" Classes="panel-title-bar">
+        <TextBlock Foreground="{DynamicResource BrushText}" FontSize="11">
+          <Run Text="Last updated: " />
+          <Run Text="{Binding LastUpdatedText}" Foreground="{DynamicResource BrushText}" FontWeight="Bold" />
+        </TextBlock>
+      </Border>
+    </Grid>
+  </Border>
+</UserControl>

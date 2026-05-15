@@ -1,0 +1,128 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:CoastalCommandCenter.Views.Controls"
+        xmlns:health="clr-namespace:CoastalCommandCenter.Models.Health"
+        x:Class="CoastalCommandCenter.Views.StreamHealthPopup"
+        Width="520" Height="520"
+        MinWidth="420" MinHeight="420"
+        Title="Stream Health"
+        Background="{DynamicResource BrushPopoutWindowBackground}"
+        SystemDecorations="None"
+        WindowStartupLocation="CenterOwner">
+  <Border BorderBrush="{DynamicResource BrushPopoutBorder}" BorderThickness="1">
+    <Grid RowDefinitions="30,*">
+      <!-- Drag handle / title bar -->
+      <Border Grid.Row="0"
+            Background="{DynamicResource BrushPopoutTitleBarBackground}"
+            Cursor="SizeAll"
+            PointerPressed="TitleBar_OnPointerPressed"
+            PointerMoved="TitleBar_OnPointerMoved"
+            PointerReleased="TitleBar_OnPointerReleased">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock Grid.Column="0"
+                   x:Name="TitleText"
+                   VerticalAlignment="Center"
+                   Margin="8,0"
+                   FontSize="12"
+                   FontFamily="Rajdhani, Tahoma, sans-serif"
+                   FontWeight="SemiBold"
+                   LetterSpacing="0.5"
+                   Foreground="{DynamicResource BrushPopoutTitleForeground}" />
+        <Button Grid.Column="1"
+                Content="✕"
+                FontSize="12"
+                Width="30" Height="30"
+                Background="Transparent"
+                Foreground="{DynamicResource BrushPopoutCloseForeground}"
+                BorderThickness="0"
+                VerticalAlignment="Center"
+                ToolTip.Tip="Close"
+                Click="CloseButton_OnClick" />
+      </Grid>
+      </Border>
+
+      <!-- Content panel -->
+      <Grid Grid.Row="1" Margin="12" RowDefinitions="Auto,Auto,*,Auto,Auto">
+        <!-- Title row -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8">
+      <Border x:Name="ClassificationBadge"
+              CornerRadius="3"
+              Padding="6,2"
+              VerticalAlignment="Center">
+        <TextBlock x:Name="ClassificationText"
+                   FontSize="11"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource BrushTextWhite}" />
+      </Border>
+        <TextBlock x:Name="TimeInStateText"
+                   FontSize="11"
+                   VerticalAlignment="Center"
+                   Foreground="{DynamicResource BrushPopoutLabelText}" />
+        </StackPanel>
+
+        <TextBlock Grid.Row="1"
+               Text="LATENCY · LOSS · BITRATE"
+                 FontSize="10"
+                 FontWeight="Bold"
+                 Margin="0,12,0,4"
+                 Foreground="{DynamicResource BrushPopoutLabelText}" />
+
+        <!-- Chart -->
+        <Border Grid.Row="2"
+            BorderBrush="{DynamicResource BrushPopoutBorder}"
+              BorderThickness="1"
+              CornerRadius="3">
+        <controls:StreamHealthChart x:Name="Chart" />
+        </Border>
+
+        <!-- Event log -->
+        <StackPanel Grid.Row="3" Margin="0,12,0,0">
+        <TextBlock Text="EVENT LOG"
+                   FontSize="10"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource BrushPopoutLabelText}" />
+        <Border BorderBrush="{DynamicResource BrushPopoutBorder}"
+                BorderThickness="1"
+                CornerRadius="3"
+                Height="120"
+                Margin="0,4,0,0">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="EventList">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="health:HealthEvent">
+                  <Grid ColumnDefinitions="Auto,*" Margin="6,2">
+                    <TextBlock Grid.Column="0"
+                               Text="{Binding Timestamp, StringFormat=\{0:HH:mm:ss\}}"
+                               FontFamily="IBM Plex Mono,Cascadia Mono,Consolas,monospace"
+                               FontSize="11"
+                               Foreground="{DynamicResource BrushPopoutLabelText}"
+                               Margin="0,0,8,0" />
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding Detail}"
+                               FontSize="10"
+                               Foreground="{DynamicResource BrushTextWhite}"
+                               TextTrimming="CharacterEllipsis" />
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+        </Border>
+        </StackPanel>
+
+        <!-- Classification panel -->
+        <Border Grid.Row="4"
+                Margin="0,12,0,0"
+                Padding="8"
+                BorderBrush="{DynamicResource BrushPopoutBorder}"
+                BorderThickness="1"
+                CornerRadius="3">
+          <TextBlock x:Name="ReasonText"
+                     FontSize="10"
+                     TextWrapping="Wrap"
+                     Foreground="{DynamicResource BrushTextWhite}" />
+        </Border>
+      </Grid>
+    </Grid>
+  </Border>
+</Window>

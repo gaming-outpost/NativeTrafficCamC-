@@ -1,0 +1,895 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CoastalCommandCenter.ViewModels"
+        xmlns:models="using:CoastalCommandCenter.Models"
+        xmlns:views="using:CoastalCommandCenter.Views"
+        x:Class="CoastalCommandCenter.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="WorldView"
+        Width="1400"
+        Height="900"
+        MinWidth="1000"
+        MinHeight="600"
+        SystemDecorations="None"
+        Classes.fullscreen-mode="{Binding IsFullscreenMode}"
+        Opened="OnOpened">
+
+  <Window.KeyBindings>
+    <KeyBinding Gesture="F11"    Command="{Binding ToggleFullscreenCommand}" />
+    <KeyBinding Gesture="Escape" Command="{Binding ExitFullscreenCommand}" />
+    <KeyBinding Gesture="Left"   Command="{Binding NavigatePreviousCaptureCommand}" />
+    <KeyBinding Gesture="Right"  Command="{Binding NavigateNextCaptureCommand}" />
+  </Window.KeyBindings>
+
+  <Window.Resources>
+
+    <!-- Camera card (left panel tree row) -->
+    <DataTemplate x:Key="CameraCardTemplate" x:DataType="models:CameraItem">
+      <Border Classes="camera-card" PointerReleased="CameraCard_PointerReleased">
+        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+          <!-- 7×7 status dot -->
+          <Ellipse Grid.Column="0"
+                   Width="7" Height="7"
+                   Margin="0,0,6,0"
+                   VerticalAlignment="Center"
+                   Classes.live-dot="{Binding IsLive}"
+                   Classes.off-dot="{Binding !IsLive}"
+                   Fill="{DynamicResource BrushOffDot}" />
+          <TextBlock Grid.Column="1"
+                     Classes="camera-name"
+                     Text="{Binding DisplayLabel}"
+                     VerticalAlignment="Center"
+                     TextTrimming="CharacterEllipsis" />
+          <!-- Favorite star indicator -->
+          <TextBlock Grid.Column="2"
+                     Text="★"
+                     FontSize="9"
+                     Foreground="#E8A000"
+                     VerticalAlignment="Center"
+                     Margin="3,0,0,0"
+                     IsVisible="{Binding IsFavorite}" />
+          <TextBlock Grid.Column="3"
+                     Classes="cam-status-label"
+                     VerticalAlignment="Center"
+                     Margin="4,0,0,0"
+                     IsVisible="{Binding IsLive}"
+                     Text="LIVE" />
+        </Grid>
+      </Border>
+    </DataTemplate>
+
+    <!-- Camera group (collapsible highway route section) -->
+    <DataTemplate x:Key="CameraGroupTemplate" x:DataType="vm:CameraGroupViewModel">
+      <StackPanel>
+        <Button Classes="cam-group-header"
+                Command="{Binding ToggleExpandedCommand}">
+          <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+            <TextBlock Grid.Column="0"
+                       Classes="cam-group-chevron"
+                       Text="{Binding IsExpanded, Converter={x:Static vm:BoolToChevronConverter.Instance}}"
+                       Margin="0,0,4,0" />
+            <TextBlock Grid.Column="1"
+                       Classes="cam-group-label"
+                       Text="{Binding GroupKey}" />
+            <TextBlock Grid.Column="2"
+                       Classes="cam-group-count"
+                       Text="{Binding Cameras.Count, StringFormat=({0})}" />
+          </Grid>
+        </Button>
+
+        <ListBox IsVisible="{Binding IsExpanded}"
+                 Classes="camera-list cam-group-list"
+                 ItemsSource="{Binding Cameras}"
+                 ItemTemplate="{StaticResource CameraCardTemplate}"
+                 SelectionChanged="LeftCameraList_OnSelectionChanged" />
+      </StackPanel>
+    </DataTemplate>
+
+    <!-- Live feed city group (feed selector tree) -->
+    <DataTemplate x:Key="FeedCityGroupTemplate" x:DataType="vm:LiveFeedCityGroupViewModel">
+      <StackPanel>
+        <Button Classes="cam-group-header"
+                Command="{Binding ToggleExpandedCommand}">
+          <Grid ColumnDefinitions="Auto,*">
+            <TextBlock Grid.Column="0"
+                       Classes="cam-group-chevron"
+                       Text="{Binding IsExpanded, Converter={x:Static vm:BoolToChevronConverter.Instance}}"
+                       Margin="0,0,4,0" />
+            <TextBlock Grid.Column="1"
+                       Classes="cam-group-label"
+                       Text="{Binding City}" />
+          </Grid>
+        </Button>
+        <ItemsControl IsVisible="{Binding IsExpanded}"
+                      ItemsSource="{Binding Feeds}"
+                      ItemTemplate="{StaticResource FeedSelectorItemTemplate}" />
+      </StackPanel>
+    </DataTemplate>
+
+    <!-- Feed selector checkbox row -->
+    <DataTemplate x:Key="FeedSelectorItemTemplate" x:DataType="vm:LiveFeedSelectorItem">
+      <CheckBox Classes="feed-selector-option"
+                IsChecked="{Binding IsSelected}">
+        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+          <TextBlock Grid.Column="0"
+                     Classes="feed-selector-name"
+                     Text="{Binding Feed.Name}"
+                     VerticalAlignment="Center"
+                     TextTrimming="CharacterEllipsis" />
+          <Border Grid.Column="1"
+                  Classes="feed-selector-type-pill"
+                  Margin="6,0,0,0"
+                  VerticalAlignment="Center">
+            <TextBlock Classes="feed-selector-type"
+                       Text="{Binding FeedTypeLabel}" />
+          </Border>
+        </Grid>
+      </CheckBox>
+    </DataTemplate>
+
+  </Window.Resources>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       Main shell: 6 rows
+         0 – Custom title bar  (22px, fullscreen-hide)
+         1 – Menu bar          (22px, fullscreen-hide)
+         2 – Toolbar           (28px, fullscreen-hide)
+         3 – 3-panel content   (*)
+         4 – Taskbar strip     (Auto, hidden when no floating windows)
+         5 – Status bar        (20px)
+       ══════════════════════════════════════════════════════════════════ -->
+  <Grid RowDefinitions="22,22,28,*,Auto,20">
+
+    <!-- ── Row 0: Custom title bar ────────────────────────────────────── -->
+    <Border Grid.Row="0"
+            Classes="title-bar fullscreen-hide"
+            PointerPressed="TitleBar_PointerPressed"
+            DoubleTapped="TitleBar_DoubleTapped">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock Grid.Column="0"
+                   Text="WorldView"
+                   Margin="8,0"
+                   VerticalAlignment="Center" />
+        <StackPanel Grid.Column="1"
+                    Orientation="Horizontal"
+                    Spacing="0"
+                    Margin="0,0,2,0">
+          <Button Classes="chrome-btn"
+                  Content="─"
+                  ToolTip.Tip="Minimize"
+                  Click="ChromeMinimize_Click" />
+          <Button Classes="chrome-btn"
+                  Content="□"
+                  ToolTip.Tip="Maximize / Restore"
+                  Click="ChromeMaximize_Click" />
+          <Button Classes="chrome-btn"
+                  Content="✕"
+                  ToolTip.Tip="Close"
+                  Click="ChromeClose_Click" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- ── Row 1: Menu bar ─────────────────────────────────────────────── -->
+    <Menu Grid.Row="1"
+          Classes="shell-menu fullscreen-hide">
+
+      <MenuItem Header="_File">
+        <MenuItem Header="E_xit" Click="FileExit_Click" />
+      </MenuItem>
+
+      <MenuItem Header="_View">
+        <MenuItem Header="Fullscreen"
+                  Command="{Binding ToggleFullscreenCommand}"
+                  IsChecked="{Binding IsFullscreenMode}"
+                  ToggleType="CheckBox"
+                  InputGesture="F11" />
+        <MenuItem Header="Close Snapshot Overlay"
+                  Command="{Binding CloseSnapshotOverlayCommand}"
+                  IsEnabled="{Binding IsSnapshotOverlayVisible}" />
+      </MenuItem>
+
+      <MenuItem x:Name="StaticViewsMenu"
+                Header="_Static Views" />
+
+      <MenuItem Header="_Capture">
+        <MenuItem Header="Capture Visible Streams"
+                  Command="{Binding CaptureVisibleStreamsCommand}"
+                  InputGesture="Ctrl+Shift+S" />
+      </MenuItem>
+
+      <MenuItem Header="_Overlay">
+        <MenuItem Header="ALPR Readers"
+                  Command="{Binding ToggleAlprLayerCommand}"
+                  IsChecked="{Binding IsAlprEnabled}"
+                  ToggleType="CheckBox" />
+      </MenuItem>
+
+      <MenuItem Header="_Feeds">
+        <MenuItem Header="Refresh Visible Feeds"
+                  Command="{Binding RefreshVisibleFeedsCommand}" />
+        <Separator />
+        <MenuItem Header="Clear Selected Feeds"
+                  Command="{Binding ClearSelectedFeedsCommand}" />
+      </MenuItem>
+
+      <MenuItem Header="_Settings">
+        <MenuItem Header="Light Theme"
+                  Command="{Binding SetThemeModeCommand}"
+                  CommandParameter="{x:Static models:AppThemeMode.Light}"
+                  IsChecked="{Binding IsLightThemeSelected}"
+                  ToggleType="Radio" />
+        <MenuItem Header="Dark Theme"
+                  Command="{Binding SetThemeModeCommand}"
+                  CommandParameter="{x:Static models:AppThemeMode.Dark}"
+                  IsChecked="{Binding IsDarkThemeSelected}"
+                  ToggleType="Radio" />
+      </MenuItem>
+
+    </Menu>
+
+    <!-- ── Row 2: Toolbar ──────────────────────────────────────────────── -->
+    <Border Grid.Row="2"
+            Classes="toolbar fullscreen-hide">
+      <StackPanel Orientation="Horizontal" Spacing="2">
+        <Button Classes="toolbar-btn" Content="New"
+                Command="{Binding NewSessionCommand}" />
+        <Button Classes="toolbar-btn" Content="Open"
+                Command="{Binding OpenSessionCommand}" />
+        <Button Classes="toolbar-btn" Content="Save"
+                Command="{Binding SaveSessionCommand}" />
+        <Border Classes="toolbar-sep" />
+        <Button Classes="toolbar-btn"
+                Content="▶ Capture"
+                Command="{Binding CaptureVisibleStreamsCommand}" />
+        <Button Classes="toolbar-btn" Content="⏹ Stop"
+                Command="{Binding StopAllPlaybackCommand}" />
+        <Button Classes="toolbar-btn" Content="📷 Snap"
+                Command="{Binding CaptureVisibleStreamsCommand}" />
+        <Border Classes="toolbar-sep" />
+        <Button Classes="toolbar-btn"
+                Content="↻ Refresh"
+                Command="{Binding RefreshVisibleFeedsCommand}" />
+        <Button Classes="toolbar-btn" Content="⚙ Settings">
+          <Button.Flyout>
+            <MenuFlyout>
+              <MenuItem Header="Light Theme"
+                        Command="{Binding SetThemeModeCommand}"
+                        CommandParameter="{x:Static models:AppThemeMode.Light}"
+                        IsChecked="{Binding IsLightThemeSelected}"
+                        ToggleType="Radio" />
+              <MenuItem Header="Dark Theme"
+                        Command="{Binding SetThemeModeCommand}"
+                        CommandParameter="{x:Static models:AppThemeMode.Dark}"
+                        IsChecked="{Binding IsDarkThemeSelected}"
+                        ToggleType="Radio" />
+              <Separator />
+              <MenuItem Header="Stream Health"
+                        ToggleType="CheckBox"
+                        IsChecked="{Binding ShowStreamHealth, Mode=TwoWay}" />
+            </MenuFlyout>
+          </Button.Flyout>
+        </Button>
+      </StackPanel>
+    </Border>
+
+    <!-- ── Row 3: Three-panel content ─────────────────────────────────── -->
+    <Grid Grid.Row="3"
+          ColumnDefinitions="210,4,*,4,190"
+          UseLayoutRounding="True">
+
+      <!-- ─── Left panel: Camera Browser ──────────────────────────────── -->
+      <Border Grid.Column="0" Classes="panel">
+        <Grid RowDefinitions="22,Auto,*,4,130">
+
+          <!-- Panel title bar -->
+          <Border Grid.Row="0" Classes="panel-title-bar">
+            <TextBlock Text="Camera Browser" Margin="6,0" />
+          </Border>
+
+          <!-- Search field -->
+          <Border Grid.Row="1" Classes="search-field">
+            <TextBox Classes="search-input"
+                     Watermark="Search cameras..."
+                     Text="{Binding CameraSearch}" />
+          </Border>
+
+          <!-- Camera tree (includes Favorites group at top when starred cameras exist) -->
+          <ScrollViewer Grid.Row="2"
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding LeftPanelGroups}"
+                          ItemTemplate="{StaticResource CameraGroupTemplate}"
+                          Padding="0,2,0,4"
+                          Background="{DynamicResource BrushWindowBg}" />
+          </ScrollViewer>
+
+          <!-- Splitter between tree and properties pane -->
+          <GridSplitter Grid.Row="3"
+                        Height="4"
+                        HorizontalAlignment="Stretch"
+                        ResizeDirection="Rows"
+                        Cursor="SizeNorthSouth" />
+
+          <!-- Properties pane -->
+          <Border Grid.Row="4" Classes="props-pane">
+            <Grid RowDefinitions="22,*">
+              <Border Grid.Row="0" Classes="panel-title-bar">
+                <TextBlock Text="Properties" Margin="6,0" />
+              </Border>
+              <Grid Grid.Row="1">
+                <!-- Show placeholder when nothing is selected -->
+                <TextBlock Classes="sysmon-dim"
+                           Text="Select a camera"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           IsVisible="{Binding SelectedCamera, Converter={x:Static vm:NullToBoolConverter.IsNull}}" />
+                <!-- Property rows when a camera is selected -->
+                <ItemsControl IsVisible="{Binding SelectedCamera, Converter={x:Static vm:NullToBoolConverter.IsNotNull}}"
+                              ItemsSource="{Binding SelectedCameraProperties}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:CameraPropertyRow">
+                      <Grid ColumnDefinitions="70,*" Height="18">
+                        <Border Grid.Column="0" Classes="props-key-cell">
+                          <TextBlock Classes="props-key"
+                                     Text="{Binding Key}"
+                                     Margin="4,0"
+                                     VerticalAlignment="Center" />
+                        </Border>
+                        <Border Grid.Column="1" Classes="props-val-cell">
+                          <TextBlock Classes="props-val"
+                                     Text="{Binding Value}"
+                                     Margin="4,0"
+                                     VerticalAlignment="Center"
+                                     TextTrimming="CharacterEllipsis" />
+                        </Border>
+                      </Grid>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </Grid>
+            </Grid>
+          </Border>
+
+        </Grid>
+      </Border>
+
+      <!-- Left splitter -->
+      <GridSplitter Grid.Column="1"
+                    Width="4"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    ResizeDirection="Columns"
+                    ShowsPreview="False"
+                    Cursor="SizeWestEast"
+                    UseLayoutRounding="True" />
+
+      <!-- ─── Center panel: Tabbed main area ───────────────────────────── -->
+      <Border Grid.Column="2" Classes="panel">
+        <TabControl x:Name="MainTabControl" Classes="main-tabs">
+
+          <!-- Tab 1: Map View -->
+          <TabItem Classes="main-tab" Header="Map View">
+            <Grid RowDefinitions="20,*">
+              <!-- Coordinate / info strip -->
+              <Border Grid.Row="0" Classes="coord-strip">
+                <StackPanel Orientation="Horizontal" Spacing="16" Margin="6,0">
+                  <TextBlock Classes="coord-text"
+                             Text="{Binding CameraCount, StringFormat={}{0} cameras}" />
+                  <TextBlock Classes="coord-text"
+                             Text="{Binding MapLayerModeLabel}" />
+                </StackPanel>
+              </Border>
+
+              <!-- Map + overlays -->
+              <Grid Grid.Row="1">
+                <!-- Mapsui map host (populated by code-behind) -->
+                <Grid x:Name="MapHost" />
+
+                <!-- Loading / error placeholder -->
+                <TextBlock x:Name="MapStatusText"
+                           Classes="map-status"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="24"
+                           IsVisible="False" />
+
+                <!-- Zoom / layer toolbar -->
+                <Border Classes="geo-toolbar"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0,0,8,0">
+                  <StackPanel Spacing="1">
+                    <Button Classes="geo-btn"
+                            Content="+"
+                            ToolTip.Tip="Zoom In"
+                            Click="MainMapZoomIn_Click" />
+                    <Button Classes="geo-btn"
+                            Content="−"
+                            ToolTip.Tip="Zoom Out"
+                            Click="MainMapZoomOut_Click" />
+                    <Border Height="1"
+                            Background="{DynamicResource BrushBorder}"
+                            Margin="2,1" />
+                    <Button Classes="geo-btn"
+                            Content="O"
+                            ToolTip.Tip="Reset View"
+                            Click="MainMapResetView_Click" />
+                    <Border Height="1"
+                            Background="{DynamicResource BrushBorder}"
+                            Margin="2,1" />
+                    <Button Classes="geo-btn"
+                            Content="{Binding MapLayerModeLabel}"
+                            ToolTip.Tip="Toggle Map / Satellite / Hybrid"
+                            Command="{Binding CycleMapLayerCommand}"
+                            FontSize="8"
+                            FontWeight="Bold" />
+                  </StackPanel>
+                </Border>
+
+                <!-- Static camera snapshot overlay -->
+                <Border Classes="snapshot-overlay"
+                        IsVisible="{Binding IsSnapshotOverlayVisible}">
+                  <Grid RowDefinitions="Auto,*">
+                    <Border Grid.Row="0" Classes="snapshot-header">
+                      <Grid ColumnDefinitions="*,Auto">
+                        <TextBlock Grid.Column="0"
+                                   Classes="snapshot-title"
+                                   Text="{Binding SnapshotOverlayTitle}"
+                                   VerticalAlignment="Center" />
+                        <Button Grid.Column="1"
+                                Classes="chrome-btn"
+                                Command="{Binding CloseSnapshotOverlayCommand}"
+                                Content="✕" />
+                      </Grid>
+                    </Border>
+                    <Border Grid.Row="1">
+                      <Image Source="{Binding SnapshotOverlayImageUrl}"
+                             Stretch="UniformToFill" />
+                    </Border>
+                  </Grid>
+                </Border>
+
+              </Grid>
+            </Grid>
+          </TabItem>
+
+          <!-- Tab 2: Camera Grid (inline VLC/MPV tiles + feed selector) -->
+          <TabItem Classes="main-tab" Header="Camera Grid">
+            <Grid RowDefinitions="Auto,Auto,*">
+
+              <!-- Feed selector toolbar -->
+              <Border Grid.Row="0" Classes="tab-toolbar">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                  <Button Classes="toolbar-btn"
+                          Content="Select Feeds"
+                          Command="{Binding ToggleFeedSelectorCommand}" />
+                  <Button Classes="toolbar-btn"
+                          Content="Clear"
+                          Command="{Binding ClearSelectedFeedsCommand}" />
+                  <TextBlock Classes="tab-toolbar-label"
+                             VerticalAlignment="Center"
+                             Text="{Binding SelectedFeedCount, StringFormat={}{0}/6 selected}" />
+                </StackPanel>
+              </Border>
+
+              <!-- Collapsible feed selector -->
+              <Border Grid.Row="1"
+                      Classes="feed-selector"
+                      Classes.open="{Binding IsFeedSelectorOpen}">
+                <Grid RowDefinitions="Auto,*,Auto">
+                  <!-- State tabs -->
+                  <ItemsControl Grid.Row="0"
+                                ItemsSource="{Binding StateTabs}"
+                                Margin="4,3,4,1"
+                                IsVisible="{Binding HasMultipleStates}">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="2" />
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate x:DataType="vm:FeedStateTabViewModel">
+                        <Button Classes="state-tab"
+                                Classes.active="{Binding IsActive}"
+                                Content="{Binding State}"
+                                Command="{Binding $parent[ItemsControl].((vm:MainViewModel)DataContext).SelectStateTabCommand}"
+                                CommandParameter="{Binding State}" />
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+
+                  <!-- City group list -->
+                  <ScrollViewer Grid.Row="1"
+                                HorizontalScrollBarVisibility="Disabled"
+                                VerticalScrollBarVisibility="Auto"
+                                Margin="4,2">
+                    <ItemsControl ItemsSource="{Binding LiveFeedCityGroups}">
+                      <ItemsControl.ItemTemplate>
+                        <StaticResource ResourceKey="FeedCityGroupTemplate" />
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                  </ScrollViewer>
+
+                  <TextBlock Grid.Row="2"
+                             Margin="8,0,8,4"
+                             Classes="feed-warning"
+                             Text="{Binding FeedSelectionWarning}" />
+                </Grid>
+              </Border>
+
+              <!-- RightPanelGridHost: populated by code-behind with EmbeddedCameraGrid -->
+              <Border Grid.Row="2"
+                      x:Name="RightPanelGridHost"
+                      Background="{DynamicResource BrushWindowBg}"
+                      ClipToBounds="True"
+                      RenderOptions.BitmapInterpolationMode="LowQuality" />
+
+            </Grid>
+          </TabItem>
+
+          <!-- Tab 3: Static Views -->
+          <TabItem Classes="main-tab" Header="Static Views">
+            <Grid RowDefinitions="Auto,Auto,*">
+
+              <!-- Toolbar -->
+              <Border Grid.Row="0" Classes="tab-toolbar">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                  <Button Classes="toolbar-btn"
+                          Content="Select Cameras"
+                          Command="{Binding ToggleStaticCameraSelectorCommand}" />
+                  <Button Classes="toolbar-btn"
+                          Content="Clear"
+                          Command="{Binding ClearStaticCameraSelectionCommand}" />
+                  <TextBlock Classes="tab-toolbar-label"
+                             VerticalAlignment="Center"
+                             Text="{Binding SelectedStaticCameraCount, StringFormat={}{0} selected}" />
+                  <Border Classes="toolbar-sep" />
+                  <Button Classes="toolbar-btn"
+                          Content="Refresh"
+                          Click="StaticViewsRefresh_Click" />
+                  <TextBlock x:Name="StaticViewsStatusText"
+                             Classes="tab-toolbar-label"
+                             VerticalAlignment="Center"
+                             Text="Static feeds load on first visit." />
+                  <Border Classes="toolbar-sep" />
+                  <TextBlock Classes="tab-toolbar-label"
+                             VerticalAlignment="Center"
+                             Text="Size:" />
+                  <Slider x:Name="StaticTileSizeSlider"
+                          Minimum="150"
+                          Maximum="1200"
+                          Value="300"
+                          Width="110"
+                          VerticalAlignment="Center"
+                          SmallChange="25"
+                          LargeChange="100"
+                          ToolTip.Tip="Camera tile size" />
+                </StackPanel>
+              </Border>
+
+              <!-- Collapsible camera selector panel -->
+              <Border Grid.Row="1"
+                      Classes="feed-selector"
+                      Classes.open="{Binding IsStaticCameraSelectorOpen}">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto"
+                              Margin="4,2">
+                  <ItemsControl ItemsSource="{Binding StaticCameraSelectorGroups}">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate x:DataType="vm:StaticCameraLocationGroupViewModel">
+                        <StackPanel>
+                          <Button Classes="cam-group-header"
+                                  Command="{Binding ToggleExpandedCommand}">
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                              <TextBlock Grid.Column="0"
+                                         Classes="cam-group-chevron"
+                                         Text="{Binding IsExpanded, Converter={x:Static vm:BoolToChevronConverter.Instance}}"
+                                         Margin="0,0,4,0" />
+                              <TextBlock Grid.Column="1"
+                                         Classes="cam-group-label"
+                                         Text="{Binding Location}" />
+                              <TextBlock Grid.Column="2"
+                                         Classes="cam-group-count"
+                                         Text="{Binding Cameras.Count, StringFormat=({0})}" />
+                            </Grid>
+                          </Button>
+                          <ItemsControl IsVisible="{Binding IsExpanded}"
+                                        ItemsSource="{Binding Cameras}">
+                            <ItemsControl.ItemTemplate>
+                              <DataTemplate x:DataType="vm:StaticCameraSelectorItem">
+                                <CheckBox Classes="feed-selector-option"
+                                          IsChecked="{Binding IsSelected}">
+                                  <TextBlock Classes="feed-selector-name"
+                                             Text="{Binding Name}"
+                                             VerticalAlignment="Center"
+                                             TextTrimming="CharacterEllipsis" />
+                                </CheckBox>
+                              </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                          </ItemsControl>
+                        </StackPanel>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </ScrollViewer>
+              </Border>
+
+              <!-- Static grid host -->
+              <ScrollViewer Grid.Row="2"
+                            HorizontalScrollBarVisibility="Disabled"
+                            VerticalScrollBarVisibility="Auto">
+                <Border x:Name="StaticViewsHost"
+                        Background="{DynamicResource BrushWindowBg}"
+                        ClipToBounds="True" />
+              </ScrollViewer>
+
+            </Grid>
+          </TabItem>
+
+          <!-- Tab 4: Captures gallery -->
+          <TabItem Classes="main-tab" Header="Captures">
+            <!-- Outer single-cell Grid allows the viewer overlay to cover the whole tab -->
+            <Grid>
+
+              <!-- Gallery content -->
+              <Grid RowDefinitions="Auto,*">
+
+                <!-- Toolbar -->
+                <Border Grid.Row="0" Classes="tab-toolbar">
+                  <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Button Classes="toolbar-btn"
+                            Content="Refresh"
+                            Command="{Binding RefreshCapturesCommand}" />
+                    <TextBlock Classes="tab-toolbar-label"
+                               VerticalAlignment="Center"
+                               Text="{Binding CaptureCount, StringFormat={}{0} capture(s)}" />
+                  </StackPanel>
+                </Border>
+
+                <!-- Scrollable capture gallery -->
+                <ScrollViewer Grid.Row="1"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto">
+                  <ItemsControl ItemsSource="{Binding Captures}" Padding="4">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate x:DataType="vm:CaptureEntryViewModel">
+                        <Border BorderBrush="{DynamicResource BrushBorder}"
+                                BorderThickness="1"
+                                Background="{DynamicResource BrushWindowBg}"
+                                Margin="4,4,4,0"
+                                Padding="0"
+                                Cursor="Hand"
+                                PointerPressed="OnCaptureEntryPointerPressed">
+                          <Grid ColumnDefinitions="180,*" Height="120">
+                            <Image Grid.Column="0"
+                                   Source="{Binding Thumbnail}"
+                                   Stretch="UniformToFill"
+                                   Width="180"
+                                   Height="120" />
+                            <StackPanel Grid.Column="1"
+                                        Spacing="4"
+                                        Margin="8,6"
+                                        VerticalAlignment="Center">
+                              <TextBlock Classes="sysmon-section-title"
+                                         Text="{Binding CameraName}"
+                                         TextTrimming="CharacterEllipsis" />
+                              <TextBlock Classes="sysmon-text"
+                                         Text="{Binding Region}" />
+                              <TextBlock Classes="sysmon-dim"
+                                         Text="{Binding DisplayTimestamp}" />
+                            </StackPanel>
+                          </Grid>
+                        </Border>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </ScrollViewer>
+
+              </Grid>
+
+              <!-- Fullscreen viewer overlay — sits above gallery when a capture is selected -->
+              <views:FullscreenCaptureViewer
+                  IsVisible="{Binding SelectedCapture,
+                              Converter={x:Static vm:NullToBoolConverter.IsNotNull}}" />
+
+            </Grid>
+          </TabItem>
+
+          <!-- Tab 5: Rotating View — random 3×3 traffic-camera grid, cycles every 45s -->
+          <TabItem Classes="main-tab" Header="Rotating View">
+            <Grid RowDefinitions="Auto,*">
+
+              <!-- Toolbar -->
+              <Border Grid.Row="0" Classes="tab-toolbar">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                  <Button Classes="toolbar-btn"
+                          Content="Shuffle Now"
+                          Command="{Binding Slideshow.ShuffleCommand}" />
+                  <ComboBox Classes="toolbar-combobox"
+                            SelectedItem="{Binding SelectedRotatingCity}"
+                            ItemsSource="{Binding RotatingViewCities}"
+                            Width="120" />
+                  <TextBlock Classes="tab-toolbar-label"
+                             VerticalAlignment="Center"
+                             Text="9 cameras • cycles every 45s" />
+                  <TextBlock Classes="tab-toolbar-label"
+                             VerticalAlignment="Center"
+                             FontStyle="Italic"
+                             Text="shuffling…"
+                             IsVisible="{Binding Slideshow.IsShuffling}" />
+                </StackPanel>
+              </Border>
+
+              <!-- Slideshow grid host — populated by code-behind with EmbeddedCameraGrid -->
+              <Border Grid.Row="1"
+                      x:Name="SlideshowGridHost"
+                      Background="{DynamicResource BrushWindowBg}"
+                      ClipToBounds="True"
+                      RenderOptions.BitmapInterpolationMode="LowQuality" />
+
+            </Grid>
+          </TabItem>
+
+        </TabControl>
+      </Border>
+
+      <!-- Right splitter -->
+      <GridSplitter Grid.Column="3"
+                    Width="4"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    ResizeDirection="Columns"
+                    ShowsPreview="False"
+                    Cursor="SizeWestEast"
+                    UseLayoutRounding="True" />
+
+      <!-- ─── Right panel: System Monitor ──────────────────────────────── -->
+      <Border Grid.Column="4" Classes="panel">
+        <Grid RowDefinitions="22,*">
+
+          <!-- Panel title bar -->
+          <Border Grid.Row="0" Classes="panel-title-bar">
+            <TextBlock Text="System Monitor" Margin="6,0" />
+          </Border>
+
+          <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+              <!-- Camera Status -->
+              <Border Classes="sysmon-section-header">
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Grid.Column="0"
+                             Classes="sysmon-section-title"
+                             Text="Camera Status" />
+                  <Button Grid.Column="1"
+                          Classes="toolbar-btn"
+                          Content="⎋ Pop Out"
+                          Command="{Binding PopOutSelectedCameraCommand}"
+                          IsEnabled="{Binding SelectedCamera, Converter={x:Static vm:NullToBoolConverter.IsNotNull}}" />
+                </Grid>
+              </Border>
+              <Border Classes="sysmon-content">
+                <StackPanel Spacing="3">
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Ellipse Classes="live-dot" Width="7" Height="7" VerticalAlignment="Center" />
+                    <TextBlock Classes="sysmon-text" Text="Online:" />
+                    <TextBlock Classes="sysmon-val" Text="{Binding OnlineCameraCount}" />
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Ellipse Classes="warn-dot" Width="7" Height="7" VerticalAlignment="Center" />
+                    <TextBlock Classes="sysmon-text" Text="Warning:" />
+                    <TextBlock Classes="sysmon-val" Text="{Binding WarnCameraCount}" />
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Ellipse Classes="off-dot" Width="7" Height="7" VerticalAlignment="Center" />
+                    <TextBlock Classes="sysmon-text" Text="Offline:" />
+                    <TextBlock Classes="sysmon-val" Text="{Binding OfflineCameraCount}" />
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+
+              <!-- Active Incidents -->
+              <Border Classes="sysmon-section-header">
+                <TextBlock Classes="sysmon-section-title" Text="Active Incidents" />
+              </Border>
+              <Border Classes="sysmon-content">
+                <TextBlock Classes="sysmon-dim"
+                           Text="No active incidents." />
+              </Border>
+
+              <!-- Auto-Refresh -->
+              <Border Classes="sysmon-section-header">
+                <TextBlock Classes="sysmon-section-title" Text="Auto-Refresh" />
+              </Border>
+              <Border Classes="sysmon-content">
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="sysmon-text" Text="Interval: 180s" />
+                  <Border Classes="progress-bar-track">
+                    <Border Classes="progress-bar-fill"
+                            Width="{Binding RefreshProgressWidth}" />
+                  </Border>
+                  <TextBlock Classes="sysmon-dim"
+                             Text="{Binding RefreshTimerText}" />
+                </StackPanel>
+              </Border>
+
+              <!-- Event Log -->
+              <Border Classes="sysmon-section-header">
+                <TextBlock Classes="sysmon-section-title" Text="Event Log" />
+              </Border>
+              <Border Classes="sysmon-content">
+                <ItemsControl ItemsSource="{Binding EventLog}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                      <TextBlock Classes="event-log-entry" Text="{Binding}" />
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </Border>
+
+              <!-- Camera Preview -->
+              <Border Classes="sysmon-section-header">
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Grid.Column="0"
+                             Classes="sysmon-section-title"
+                             Text="Camera Preview" />
+                  <Button Grid.Column="1"
+                          Classes="toolbar-btn"
+                          Command="{Binding ToggleCameraPreviewCommand}"
+                          Content="{Binding IsCameraPreviewVisible, Converter={x:Static vm:BoolToChevronConverter.Instance}}" />
+                </Grid>
+              </Border>
+              <Border Classes="sysmon-content"
+                      IsVisible="{Binding IsCameraPreviewVisible}"
+                      Height="180"
+                      Padding="0">
+                <Border x:Name="CameraPreviewHost"
+                        Background="{DynamicResource BrushWindowBg}"
+                        ClipToBounds="True"
+                        RenderOptions.BitmapInterpolationMode="LowQuality" />
+              </Border>
+
+              <!-- Static CAMERA 1923 Preview -->
+              <views:StaticCameraPreviewWidget
+                  DataContext="{Binding StaticCameraPreview1923ViewModel}" />
+
+            </StackPanel>
+          </ScrollViewer>
+
+        </Grid>
+      </Border>
+
+    </Grid><!-- /3-panel Grid -->
+
+    <!-- ── Row 5: Status bar ──────────────────────────────────────────── -->
+    <Border Grid.Row="5" Classes="status-bar">
+      <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto">
+        <Border Grid.Column="0" Classes="status-seg">
+          <TextBlock Classes="status-text"
+                     Text="{Binding CameraCount, StringFormat={}{0} cameras loaded}" />
+        </Border>
+        <Border Grid.Column="1" Classes="status-seg">
+          <TextBlock Classes="status-text"
+                     Text="{Binding StartupStatus, FallbackValue=Ready}" />
+        </Border>
+        <Border Grid.Column="2" Classes="status-seg">
+          <TextBlock Classes="status-text"
+                     Text="{Binding RefreshTimerText, StringFormat=Auto-refresh: {0}}" />
+        </Border>
+        <Border Grid.Column="3" Classes="status-seg">
+          <TextBlock Classes="status-text"
+                     Text="{Binding CurrentTime, StringFormat=Last sync: {0}}" />
+        </Border>
+        <Border Grid.Column="4" Classes="status-seg last">
+          <TextBlock Classes="status-text"
+                     Text="TxDOT WorldView v4.2.1"
+                     HorizontalAlignment="Right" />
+        </Border>
+      </Grid>
+    </Border>
+
+  </Grid>
+</Window>

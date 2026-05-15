@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CoastalCommandCenter.Views.RenameDialog"
+        Title="Rename Camera"
+        Width="360"
+        Height="140"
+        MinWidth="300"
+        MinHeight="120"
+        SizeToContent="Height"
+        CanResize="False"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        SystemDecorations="BorderOnly">
+
+  <Grid RowDefinitions="Auto,Auto,Auto" Margin="16">
+
+    <TextBlock Grid.Row="0"
+               Text="Enter a new display name:"
+               Margin="0,0,0,8"
+               FontSize="12" />
+
+    <TextBox Grid.Row="1"
+             x:Name="NameBox"
+             Margin="0,0,0,12"
+             FontSize="12"
+             KeyDown="NameBox_KeyDown" />
+
+    <StackPanel Grid.Row="2"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                Spacing="8">
+      <Button x:Name="OkButton"
+              Content="OK"
+              Width="80"
+              IsDefault="True"
+              Click="OkButton_Click" />
+      <Button x:Name="CancelButton"
+              Content="Cancel"
+              Width="80"
+              IsCancel="True"
+              Click="CancelButton_Click" />
+    </StackPanel>
+
+  </Grid>
+</Window>

@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <RootNamespace>CoastalCommandCenter</RootNamespace>
+    <!-- Keep package vulnerability audit enabled in CI, but avoid NU1900 noise in offline local builds. -->
+    <NuGetAudit Condition="'$(CI)' != 'true'">false</NuGetAudit>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Avalonia UI Framework (11.3+ required by Mapsui.Avalonia 5.x) -->
+    <PackageReference Include="Avalonia" Version="11.3.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.1" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.1" />
+
+    <!-- Mapsui (native .NET map control, SkiaSharp rendering) -->
+    <PackageReference Include="Mapsui.Avalonia" Version="5.*" />
+    <PackageReference Include="Mapsui.Tiling" Version="5.*" />
+
+    <!-- VLC video playback (uses system VLC on Linux) -->
+    <PackageReference Include="LibVLCSharp" Version="3.9.3" />
+    <PackageReference Include="LibVLCSharp.Avalonia" Version="3.9.3" />
+
+    <!-- MVVM -->
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.8" />
+
+    <!-- Diagnostics (optional, useful during dev) -->
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.1" Condition="'$(Configuration)' == 'Debug'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="src/Assets/**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Assets/%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="Data/**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="src/Assets/Fonts/**/*">
+      <Link>Assets/Fonts/%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </AvaloniaResource>
+  </ItemGroup>
+
+
+</Project>

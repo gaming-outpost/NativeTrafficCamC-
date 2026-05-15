@@ -1,0 +1,891 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         Classic Enterprise UI — Ghidra/Wireshark (Light) / Eclipse/IDA (Dark)
+         All colors reference the DynamicResource brush tokens in App.axaml.
+         ThemeService mutates those brushes at runtime; no static references.
+         ═══════════════════════════════════════════════════════════════ -->
+
+    <!-- ── Window base ────────────────────────────────────────────────── -->
+    <Style Selector="Window">
+        <Setter Property="Background"  Value="{DynamicResource BrushAppBg}"/>
+        <Setter Property="Foreground"  Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily"  Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"    Value="11"/>
+    </Style>
+
+    <!-- Hide title bar / menu / toolbar in fullscreen mode -->
+    <Style Selector="Window.fullscreen-mode Border.title-bar">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="Window.fullscreen-mode Menu.shell-menu">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="Window.fullscreen-mode Border.toolbar">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!-- ── Title bar ──────────────────────────────────────────────────── -->
+    <Style Selector="Border.title-bar">
+        <Setter Property="Background" Value="{DynamicResource BrushTitleBar}"/>
+        <Setter Property="Height"     Value="22"/>
+    </Style>
+
+    <Style Selector="Border.title-bar TextBlock">
+        <Setter Property="Foreground"  Value="{DynamicResource BrushTextTitle}"/>
+        <Setter Property="FontWeight"  Value="Bold"/>
+        <Setter Property="FontSize"    Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- ── Win32-style button (raised bevel) ──────────────────────────── -->
+    <!-- Shared ControlTemplate for all win32 buttons -->
+    <Style Selector="Button.win32-btn">
+        <Setter Property="Background"               Value="{DynamicResource BrushBtnBg}"/>
+        <Setter Property="Foreground"               Value="{DynamicResource BrushText}"/>
+        <Setter Property="BorderThickness"          Value="0"/>
+        <Setter Property="CornerRadius"             Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="Cursor"                   Value="Arrow"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="BevelOuter"
+                        Background="{DynamicResource BrushBtnBg}"
+                        BorderBrush="{DynamicResource BrushBevelHigh}"
+                        BorderThickness="1,1,0,0">
+                    <Border Name="BevelInner"
+                            BorderBrush="{DynamicResource BrushBevelShad}"
+                            BorderThickness="0,0,1,1"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          FontFamily="{TemplateBinding FontFamily}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          FontWeight="{TemplateBinding FontWeight}"
+                                          Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.win32-btn:pointerover /template/ Border#BevelOuter">
+        <Setter Property="Background" Value="{DynamicResource BrushBtnBg}"/>
+    </Style>
+
+    <!-- Pressed: invert bevel (sunken look) -->
+    <Style Selector="Button.win32-btn:pressed /template/ Border#BevelOuter">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelShad}"/>
+    </Style>
+    <Style Selector="Button.win32-btn:pressed /template/ Border#BevelInner">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelHigh}"/>
+    </Style>
+
+    <!-- ── Chrome buttons (title bar ─ □ ✕) ──────────────────────────── -->
+    <Style Selector="Button.chrome-btn">
+        <Setter Property="Width"   Value="16"/>
+        <Setter Property="Height"  Value="14"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="Margin"  Value="1,4,1,4"/>
+        <Setter Property="Background"               Value="{DynamicResource BrushBtnBg}"/>
+        <Setter Property="Foreground"               Value="{DynamicResource BrushText}"/>
+        <Setter Property="BorderThickness"          Value="0"/>
+        <Setter Property="CornerRadius"             Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="BevelOuter"
+                        Background="{DynamicResource BrushBtnBg}"
+                        BorderBrush="{DynamicResource BrushBevelHigh}"
+                        BorderThickness="1,1,0,0">
+                    <Border Name="BevelInner"
+                            BorderBrush="{DynamicResource BrushBevelShad}"
+                            BorderThickness="0,0,1,1">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.chrome-btn:pressed /template/ Border#BevelOuter">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelShad}"/>
+    </Style>
+    <Style Selector="Button.chrome-btn:pressed /template/ Border#BevelInner">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelHigh}"/>
+    </Style>
+
+    <!-- ── Toolbar ────────────────────────────────────────────────────── -->
+    <Style Selector="Border.toolbar">
+        <Setter Property="Background"      Value="{DynamicResource BrushMenuBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Height"          Value="28"/>
+        <Setter Property="Padding"         Value="3,3,3,3"/>
+    </Style>
+
+    <Style Selector="Button.toolbar-btn">
+        <Setter Property="Height"          Value="22"/>
+        <Setter Property="Padding"         Value="6,2"/>
+        <Setter Property="FontFamily"      Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"        Value="10"/>
+        <Setter Property="Background"               Value="{DynamicResource BrushBtnBg}"/>
+        <Setter Property="Foreground"               Value="{DynamicResource BrushText}"/>
+        <Setter Property="BorderThickness"          Value="0"/>
+        <Setter Property="CornerRadius"             Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="BevelOuter"
+                        Background="{DynamicResource BrushBtnBg}"
+                        BorderBrush="{DynamicResource BrushBevelHigh}"
+                        BorderThickness="1,1,0,0">
+                    <Border Name="BevelInner"
+                            BorderBrush="{DynamicResource BrushBevelShad}"
+                            BorderThickness="0,0,1,1"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          FontFamily="{TemplateBinding FontFamily}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.toolbar-btn:pressed /template/ Border#BevelOuter">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelShad}"/>
+    </Style>
+    <Style Selector="Button.toolbar-btn:pressed /template/ Border#BevelInner">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelHigh}"/>
+    </Style>
+
+    <Style Selector="Border.toolbar-sep">
+        <Setter Property="Width"              Value="1"/>
+        <Setter Property="Height"             Value="18"/>
+        <Setter Property="Background"         Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="Margin"             Value="4,0"/>
+        <Setter Property="VerticalAlignment"  Value="Center"/>
+    </Style>
+
+    <Style Selector="ComboBox.toolbar-combobox">
+        <Setter Property="Height"          Value="22"/>
+        <Setter Property="Padding"         Value="4,2"/>
+        <Setter Property="FontFamily"      Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"        Value="10"/>
+        <Setter Property="Background"      Value="{DynamicResource BrushBtnBg}"/>
+        <Setter Property="Foreground"      Value="{DynamicResource BrushText}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBevelHigh}"/>
+        <Setter Property="BorderThickness" Value="1,1,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="ComboBox.toolbar-combobox /template/ Border#PART_Border">
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBevelShad}"/>
+        <Setter Property="BorderThickness" Value="0,0,1,1"/>
+    </Style>
+
+    <!-- ── Menu bar ───────────────────────────────────────────────────── -->
+    <Style Selector="Menu.shell-menu">
+        <Setter Property="Background"      Value="{DynamicResource BrushMenuBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Padding"         Value="2,0"/>
+        <Setter Property="Height"          Value="22"/>
+    </Style>
+
+    <Style Selector="Menu.shell-menu > MenuItem">
+        <Setter Property="FontFamily"  Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"    Value="11"/>
+        <Setter Property="Foreground"  Value="{DynamicResource BrushText}"/>
+        <Setter Property="Background"  Value="Transparent"/>
+        <Setter Property="Padding"     Value="6,2"/>
+        <Setter Property="Height"      Value="22"/>
+    </Style>
+
+    <Style Selector="Menu.shell-menu MenuItem">
+        <Setter Property="FontFamily"  Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"    Value="11"/>
+        <Setter Property="Foreground"  Value="{DynamicResource BrushText}"/>
+    </Style>
+
+    <!-- ── GridSplitter ───────────────────────────────────────────────── -->
+    <Style Selector="GridSplitter">
+        <Setter Property="Background" Value="{DynamicResource BrushBorder}"/>
+    </Style>
+
+    <!-- ── Panel borders ──────────────────────────────────────────────── -->
+    <Style Selector="Border.panel">
+        <Setter Property="Background"      Value="{DynamicResource BrushPanelBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBevelShad}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <!-- ── Panel title bars ───────────────────────────────────────────── -->
+    <Style Selector="Border.panel-title-bar">
+        <Setter Property="Background" Value="{DynamicResource BrushTitleBar}"/>
+        <Setter Property="Height"     Value="22"/>
+    </Style>
+
+    <Style Selector="Border.panel-title-bar TextBlock">
+        <Setter Property="Foreground"  Value="{DynamicResource BrushTextTitle}"/>
+        <Setter Property="FontWeight"  Value="Bold"/>
+        <Setter Property="FontSize"    Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- ── Search input ───────────────────────────────────────────────── -->
+    <Style Selector="Border.search-field">
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="Padding"         Value="2"/>
+    </Style>
+
+    <Style Selector="TextBox.search-input">
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="Foreground"      Value="{DynamicResource BrushText}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushFieldHigh}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius"    Value="0"/>
+        <Setter Property="Padding"         Value="3,2"/>
+        <Setter Property="MinHeight"       Value="0"/>
+        <Setter Property="FontFamily"      Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"        Value="11"/>
+    </Style>
+
+    <!-- ── Camera browser tree ────────────────────────────────────────── -->
+    <Style Selector="ListBox.camera-list">
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding"         Value="0"/>
+    </Style>
+
+    <Style Selector="ListBox.cam-group-list">
+        <Setter Property="Background"      Value="Transparent"/>
+        <Setter Property="Padding"         Value="0"/>
+    </Style>
+
+    <Style Selector="ListBoxItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding"    Value="1,1"/>
+        <Setter Property="Margin"     Value="0"/>
+    </Style>
+
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrushSelBg}"/>
+    </Style>
+
+    <Style Selector="ListBoxItem:selected TextBlock.camera-name">
+        <Setter Property="Foreground" Value="{DynamicResource BrushSelText}"/>
+    </Style>
+
+    <Style Selector="ListBoxItem:selected TextBlock.camera-meta">
+        <Setter Property="Foreground" Value="{DynamicResource BrushSelText}"/>
+    </Style>
+
+    <!-- Group header button -->
+    <Style Selector="Button.cam-group-header">
+        <Setter Property="Background"                 Value="{DynamicResource BrushPanelBg}"/>
+        <Setter Property="BorderBrush"                Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness"            Value="0,0,0,1"/>
+        <Setter Property="Padding"                    Value="4,2"/>
+        <Setter Property="Margin"                     Value="0,2,0,0"/>
+        <Setter Property="HorizontalAlignment"        Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Cursor"                     Value="Hand"/>
+        <Setter Property="Foreground"                 Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontWeight"                 Value="Bold"/>
+        <Setter Property="FontFamily"                 Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"                   Value="11"/>
+    </Style>
+
+    <Style Selector="Button.cam-group-header:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BrushSelBg}"/>
+    </Style>
+
+    <Style Selector="Button.cam-group-header:pointerover TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource BrushSelText}"/>
+    </Style>
+
+    <Style Selector="TextBlock.cam-group-label">
+        <Setter Property="Foreground"        Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily"        Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"          Value="11"/>
+        <Setter Property="FontWeight"        Value="Bold"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="TextBlock.cam-group-count">
+        <Setter Property="Foreground"        Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily"        Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"          Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin"            Value="4,0,0,0"/>
+    </Style>
+
+    <Style Selector="TextBlock.cam-group-chevron">
+        <Setter Property="Foreground"        Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontSize"          Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Camera card (tree row) -->
+    <Style Selector="Border.camera-card">
+        <Setter Property="Background"      Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding"         Value="24,1,4,1"/>
+    </Style>
+
+    <Style Selector="TextBlock.camera-name">
+        <Setter Property="Foreground" Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="11"/>
+    </Style>
+
+    <Style Selector="TextBlock.camera-meta">
+        <Setter Property="Foreground" Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="10"/>
+    </Style>
+
+    <Style Selector="TextBlock.cam-status-label">
+        <Setter Property="Foreground" Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="10"/>
+    </Style>
+
+    <!-- Live badge (animated pulse) -->
+    <Style Selector="Border.live-badge">
+        <Setter Property="Background" Value="{DynamicResource BrushLiveDot}"/>
+        <Setter Property="Padding"    Value="3,0"/>
+        <Style.Animations>
+            <Animation Duration="0:0:1" IterationCount="INFINITE">
+                <KeyFrame Cue="0%">  <Setter Property="Opacity" Value="1.0"/></KeyFrame>
+                <KeyFrame Cue="50%"> <Setter Property="Opacity" Value="0.3"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <Style Selector="Border.live-badge TextBlock">
+        <Setter Property="Foreground"  Value="#ffffff"/>
+        <Setter Property="FontSize"    Value="9"/>
+        <Setter Property="FontWeight"  Value="Bold"/>
+    </Style>
+
+    <!-- ── Status dots ────────────────────────────────────────────────── -->
+    <Style Selector="Ellipse.live-dot">
+        <Setter Property="Fill" Value="{DynamicResource BrushLiveDot}"/>
+    </Style>
+    <Style Selector="Ellipse.warn-dot">
+        <Setter Property="Fill" Value="{DynamicResource BrushWarnDot}"/>
+    </Style>
+    <Style Selector="Ellipse.off-dot">
+        <Setter Property="Fill" Value="{DynamicResource BrushOffDot}"/>
+    </Style>
+
+    <!-- ── Properties pane ────────────────────────────────────────────── -->
+    <Style Selector="Border.props-pane">
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+    </Style>
+
+    <Style Selector="Border.props-key-cell">
+        <Setter Property="Background"      Value="{DynamicResource BrushPanelBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    </Style>
+
+    <Style Selector="TextBlock.props-key">
+        <Setter Property="Foreground" Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="11"/>
+    </Style>
+
+    <Style Selector="Border.props-val-cell">
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    </Style>
+
+    <Style Selector="TextBlock.props-val">
+        <Setter Property="Foreground" Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="11"/>
+    </Style>
+
+    <!-- ── Tab control (center area) ──────────────────────────────────── -->
+    <Style Selector="TabControl.main-tabs">
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+        <Setter Property="Padding"         Value="0"/>
+    </Style>
+
+    <Style Selector="TabItem.main-tab">
+        <Setter Property="Background"      Value="{DynamicResource BrushPanelBg}"/>
+        <Setter Property="Foreground"      Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily"      Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"        Value="11"/>
+        <Setter Property="Padding"         Value="8,3"/>
+        <Setter Property="Margin"          Value="0,0,2,0"/>
+        <Setter Property="MinHeight"       Value="22"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="1,1,1,0"/>
+    </Style>
+
+    <Style Selector="TabItem.main-tab:selected">
+        <Setter Property="Background" Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="ZIndex"     Value="1"/>
+    </Style>
+
+    <!-- Coordinate strip (map tab top bar) -->
+    <Style Selector="Border.coord-strip">
+        <Setter Property="Background"      Value="{DynamicResource BrushPanelBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Height"          Value="20"/>
+    </Style>
+
+    <Style Selector="TextBlock.coord-text">
+        <Setter Property="Foreground"        Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily"        Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"          Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Geo toolbar (map zoom/layer buttons) -->
+    <Style Selector="Border.geo-toolbar">
+        <Setter Property="Background"      Value="{DynamicResource BrushBtnBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBevelHigh}"/>
+        <Setter Property="BorderThickness" Value="1,1,0,0"/>
+        <Setter Property="ZIndex"          Value="500"/>
+        <Setter Property="Padding"         Value="1"/>
+    </Style>
+
+    <Style Selector="Button.geo-btn">
+        <Setter Property="Width"                      Value="22"/>
+        <Setter Property="Height"                     Value="22"/>
+        <Setter Property="Padding"                    Value="0"/>
+        <Setter Property="FontFamily"                 Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"                   Value="12"/>
+        <Setter Property="FontWeight"                 Value="Bold"/>
+        <Setter Property="Background"                 Value="{DynamicResource BrushBtnBg}"/>
+        <Setter Property="Foreground"                 Value="{DynamicResource BrushText}"/>
+        <Setter Property="BorderThickness"            Value="0"/>
+        <Setter Property="CornerRadius"               Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="BevelOuter"
+                        Background="{DynamicResource BrushBtnBg}"
+                        BorderBrush="{DynamicResource BrushBevelHigh}"
+                        BorderThickness="1,1,0,0">
+                    <Border Name="BevelInner"
+                            BorderBrush="{DynamicResource BrushBevelShad}"
+                            BorderThickness="0,0,1,1">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          FontFamily="{TemplateBinding FontFamily}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          FontWeight="{TemplateBinding FontWeight}"
+                                          Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.geo-btn:pressed /template/ Border#BevelOuter">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelShad}"/>
+    </Style>
+    <Style Selector="Button.geo-btn:pressed /template/ Border#BevelInner">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelHigh}"/>
+    </Style>
+
+    <!-- Snapshot overlay (floats over map) -->
+    <Style Selector="Border.snapshot-overlay">
+        <Setter Property="Width"               Value="280"/>
+        <Setter Property="Height"              Value="180"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment"   Value="Bottom"/>
+        <Setter Property="Margin"              Value="8"/>
+        <Setter Property="Background"          Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="BorderBrush"         Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness"     Value="2"/>
+        <Setter Property="ZIndex"              Value="600"/>
+        <Setter Property="BoxShadow"           Value="2 2 0 0 #808080"/>
+    </Style>
+
+    <Style Selector="Border.snapshot-header">
+        <Setter Property="Background" Value="{DynamicResource BrushTitleBar}"/>
+        <Setter Property="Padding"    Value="6,3"/>
+    </Style>
+
+    <Style Selector="TextBlock.snapshot-title">
+        <Setter Property="Foreground"  Value="{DynamicResource BrushTextTitle}"/>
+        <Setter Property="FontWeight"  Value="Bold"/>
+        <Setter Property="FontSize"    Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="TextBlock.map-status">
+        <Setter Property="Foreground"   Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily"   Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"     Value="11"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Tab toolbar strip (inside tabs) -->
+    <Style Selector="Border.tab-toolbar">
+        <Setter Property="Background"      Value="{DynamicResource BrushMenuBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Padding"         Value="3,2"/>
+    </Style>
+
+    <Style Selector="TextBlock.tab-toolbar-label">
+        <Setter Property="Foreground"        Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily"        Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"          Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Feed selector panel (live feeds tab) -->
+    <Style Selector="Border.feed-selector">
+        <Setter Property="Background"  Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Setter Property="Opacity"     Value="0"/>
+        <Setter Property="MaxHeight"   Value="0"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="MaxHeight" Duration="0:0:0.15"/>
+                <DoubleTransition Property="Opacity"   Duration="0:0:0.10"/>
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <Style Selector="Border.feed-selector.open">
+        <Setter Property="BorderBrush"      Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness"  Value="0,0,0,1"/>
+        <Setter Property="Padding"          Value="0,2"/>
+        <Setter Property="Opacity"          Value="1"/>
+        <Setter Property="MaxHeight"        Value="200"/>
+        <Setter Property="IsHitTestVisible" Value="True"/>
+    </Style>
+
+    <!-- Feed selector checkbox rows -->
+    <Style Selector="CheckBox.feed-selector-option">
+        <Setter Property="HorizontalAlignment"        Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="FontFamily"  Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"    Value="11"/>
+        <Setter Property="Foreground"  Value="{DynamicResource BrushText}"/>
+        <Setter Property="Padding"     Value="0"/>
+        <Setter Property="Margin"      Value="2,1"/>
+        <Setter Property="MinHeight"   Value="18"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="RowBorder"
+                        Background="{DynamicResource BrushWindowBg}"
+                        BorderBrush="{DynamicResource BrushBorder}"
+                        BorderThickness="0,0,0,1"
+                        Padding="4,2">
+                    <Grid ColumnDefinitions="16,*">
+                        <Border Name="CheckBox"
+                                Width="13" Height="13"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource BrushInputBg}"
+                                BorderBrush="{DynamicResource BrushFieldHigh}"
+                                BorderThickness="1" />
+                        <Path Name="Checkmark"
+                              Grid.Column="0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Margin="1,0,0,0"
+                              Data="M 2 7 L 5 10 L 11 3"
+                              Stroke="{DynamicResource BrushText}"
+                              StrokeThickness="2"
+                              IsVisible="False" />
+                        <ContentPresenter Grid.Column="1"
+                                          Margin="4,0,0,0"
+                                          VerticalAlignment="Center"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="CheckBox.feed-selector-option:pointerover /template/ Border#RowBorder">
+        <Setter Property="Background" Value="{DynamicResource BrushSelBg}"/>
+    </Style>
+    <Style Selector="CheckBox.feed-selector-option:pointerover /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource BrushSelText}"/>
+    </Style>
+
+    <Style Selector="CheckBox.feed-selector-option:checked /template/ Border#RowBorder">
+        <Setter Property="Background" Value="{DynamicResource BrushSelBg}"/>
+    </Style>
+    <Style Selector="CheckBox.feed-selector-option:checked /template/ Path#Checkmark">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Stroke"    Value="{DynamicResource BrushSelText}"/>
+    </Style>
+
+    <Style Selector="TextBlock.feed-selector-name">
+        <Setter Property="Foreground" Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="11"/>
+    </Style>
+
+    <Style Selector="Border.feed-selector-type-pill">
+        <Setter Property="Background"      Value="{DynamicResource BrushPanelBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding"         Value="4,0"/>
+    </Style>
+
+    <Style Selector="TextBlock.feed-selector-type">
+        <Setter Property="Foreground" Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="9"/>
+    </Style>
+
+    <Style Selector="TextBlock.feed-warning">
+        <Setter Property="Foreground" Value="{DynamicResource BrushWarnDot}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="11"/>
+    </Style>
+
+    <!-- State tabs (feed selector) -->
+    <Style Selector="Button.state-tab">
+        <Setter Property="Padding"    Value="6,2"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="11"/>
+        <Setter Property="MinWidth"   Value="0"/>
+        <Setter Property="Background"               Value="{DynamicResource BrushBtnBg}"/>
+        <Setter Property="Foreground"               Value="{DynamicResource BrushText}"/>
+        <Setter Property="BorderThickness"          Value="0"/>
+        <Setter Property="CornerRadius"             Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment"   Value="Center"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="BevelOuter"
+                        Background="{DynamicResource BrushBtnBg}"
+                        BorderBrush="{DynamicResource BrushBevelHigh}"
+                        BorderThickness="1,1,0,0">
+                    <Border Name="BevelInner"
+                            BorderBrush="{DynamicResource BrushBevelShad}"
+                            BorderThickness="0,0,1,1"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          FontFamily="{TemplateBinding FontFamily}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.state-tab:pressed /template/ Border#BevelOuter">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelShad}"/>
+    </Style>
+    <Style Selector="Button.state-tab:pressed /template/ Border#BevelInner">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelHigh}"/>
+    </Style>
+
+    <Style Selector="Button.state-tab.active /template/ Border#BevelOuter">
+        <Setter Property="Background"  Value="{DynamicResource BrushSelBg}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelShad}"/>
+    </Style>
+    <Style Selector="Button.state-tab.active /template/ Border#BevelInner">
+        <Setter Property="BorderBrush" Value="{DynamicResource BrushBevelHigh}"/>
+    </Style>
+    <Style Selector="Button.state-tab.active ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource BrushSelText}"/>
+    </Style>
+
+    <!-- ── System Monitor panel (right) ───────────────────────────────── -->
+    <Style Selector="Border.sysmon-section-header">
+        <Setter Property="Background"      Value="{DynamicResource BrushPanelBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Padding"         Value="4,3"/>
+    </Style>
+
+    <Style Selector="TextBlock.sysmon-section-title">
+        <Setter Property="Foreground"  Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontWeight"  Value="Bold"/>
+        <Setter Property="FontFamily"  Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"    Value="11"/>
+    </Style>
+
+    <Style Selector="Border.sysmon-content">
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="Padding"         Value="6,4"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    </Style>
+
+    <!-- Static camera preview widget container -->
+    <Style Selector="Border.static-preview-container">
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,1,0,1"/>
+        <Setter Property="Padding"         Value="0"/>
+        <Setter Property="Height"          Value="160"/>
+        <Setter Property="MinHeight"       Value="160"/>
+        <Setter Property="Margin"          Value="0,4,0,0"/>
+    </Style>
+
+    <Style Selector="TextBlock.sysmon-text">
+        <Setter Property="Foreground" Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="11"/>
+    </Style>
+
+    <Style Selector="TextBlock.sysmon-val">
+        <Setter Property="Foreground"  Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontWeight"  Value="Bold"/>
+        <Setter Property="FontFamily"  Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"    Value="11"/>
+    </Style>
+
+    <Style Selector="TextBlock.sysmon-dim">
+        <Setter Property="Foreground" Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="11"/>
+    </Style>
+
+    <!-- Auto-refresh progress bar -->
+    <Style Selector="Border.progress-bar-track">
+        <Setter Property="Height"          Value="14"/>
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushFieldHigh}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ClipToBounds"    Value="True"/>
+    </Style>
+
+    <Style Selector="Border.progress-bar-fill">
+        <Setter Property="Background"          Value="{DynamicResource BrushSelBg}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Height"              Value="14"/>
+    </Style>
+
+    <!-- Event log entries -->
+    <Style Selector="TextBlock.event-log-entry">
+        <Setter Property="Foreground" Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily" Value="Consolas, 'Courier New', monospace"/>
+        <Setter Property="FontSize"   Value="9"/>
+    </Style>
+
+    <!-- ── Status bar ─────────────────────────────────────────────────── -->
+    <Style Selector="Border.status-bar">
+        <Setter Property="Background"      Value="{DynamicResource BrushAppBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+        <Setter Property="Height"          Value="20"/>
+    </Style>
+
+    <Style Selector="Border.status-seg">
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+        <Setter Property="Padding"         Value="5,0"/>
+    </Style>
+
+    <Style Selector="Border.status-seg.last">
+        <Setter Property="BorderThickness" Value="1,0,0,0"/>
+    </Style>
+
+    <Style Selector="TextBlock.status-text">
+        <Setter Property="Foreground"        Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily"        Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"          Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Window taskbar strip (for minimized floating windows) -->
+    <Style Selector="Border.taskbar-strip">
+        <Setter Property="Background"      Value="{DynamicResource BrushAppBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+        <Setter Property="Height"          Value="24"/>
+        <Setter Property="Padding"         Value="4,0"/>
+    </Style>
+
+    <Style Selector="TextBlock.taskbar-label">
+        <Setter Property="Foreground"        Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="FontFamily"        Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"          Value="11"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin"            Value="0,0,6,0"/>
+    </Style>
+
+    <!-- ── General TextBlock default ──────────────────────────────────── -->
+    <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource BrushText}"/>
+    </Style>
+
+    <!-- ── CameraGridWindow / tile styles (floating popout) ───────────── -->
+    <Style Selector="Border.stream-card">
+        <Setter Property="Background"      Value="{DynamicResource BrushWindowBg}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style Selector="Border.stream-card-header">
+        <Setter Property="Background"      Value="{DynamicResource BrushTitleBar}"/>
+        <Setter Property="BorderBrush"     Value="{DynamicResource BrushBorder}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Padding"         Value="4,3"/>
+    </Style>
+
+    <Style Selector="Border.stream-card-header TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource BrushTextTitle}"/>
+        <Setter Property="FontFamily" Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"   Value="10"/>
+    </Style>
+
+    <Style Selector="TextBlock.stream-placeholder">
+        <Setter Property="Foreground"          Value="{DynamicResource BrushTextDim}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment"   Value="Center"/>
+        <Setter Property="FontFamily"          Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"            Value="11"/>
+    </Style>
+
+    <Style Selector="TextBlock.stream-error">
+        <Setter Property="Foreground"   Value="{DynamicResource BrushText}"/>
+        <Setter Property="FontFamily"   Value="Tahoma, 'MS Sans Serif', Arial, sans-serif"/>
+        <Setter Property="FontSize"     Value="11"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin"       Value="10"/>
+    </Style>
+
+</Styles>

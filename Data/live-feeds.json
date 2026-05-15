@@ -1,0 +1,679 @@
+[
+    {
+        "id": 1,
+        "name": "28th and Seawall",
+        "location": "Galveston",
+        "lat": 29.284,
+        "lng": -94.805,
+        "hlsUrl": "https://usw01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.ranl5w.fd0.sm1.av1.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8"
+    },
+    {
+        "id": 2,
+        "name": "73rd and Seawall",
+        "location": "Galveston",
+        "lat": 29.27,
+        "lng": -94.842,
+        "hlsUrl": "https://use01-smr03-relay.ozolio.com/hls-live/_definst_/relay01.vzcxdtz.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8"
+    },
+    {
+        "id": 3,
+        "name": "Galveston Skycam North",
+        "location": "Galveston",
+        "lat": 29.31,
+        "lng": -94.795,
+        "hlsUrl": "https://use01-smr04-relay.ozolio.com/hls-live/_definst_/relay01.fjfebpl.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8"
+    },
+    {
+        "id": 4,
+        "name": "Galveston Harbor",
+        "location": "Galveston",
+        "lat": 29.308,
+        "lng": -94.789,
+        "hlsUrl": "https://usw01-smr05-relay.ozolio.com/hls-live/_definst_/relay01.zcsqd9k.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8"
+    },
+    {
+        "id": 5,
+        "name": "Stanton Bridge US-Mexico Border",
+        "location": "El Paso",
+        "lat": 31.7587,
+        "lng": -106.4429,
+        "hlsUrl": "https://zoocams.elpasozoo.org/stantonbridge1.m3u8"
+    },
+  {
+    "id": "yt-galv-seawall",
+    "name": "Galveston Seawall",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/HkHhXsWci7Q",
+    "lat": 29.2849,
+    "lng": -94.7970,
+    "city": "Galveston"
+  },
+  {
+    "id": "yt-galv-murdochs",
+    "name": "Galveston Seawall - Murdoch's",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/aZ0tx7eeLYU",
+    "lat": 29.2846,
+    "lng": -94.7970,
+    "city": "Galveston"
+  },
+  {
+    "id": "yt-galv-strand",
+    "name": "Galveston Strand",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/QIBmMEbLtKw",
+    "lat": 29.307221,
+    "lng": -94.794920,
+    "city": "Galveston"
+  },
+  {
+    "id": "yt-nassau-bay",
+    "name": "Nassau Bay",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/WspqsK3bXAY",
+    "lat": 29.54883,
+    "lng": -95.09118,
+    "city": "Nassau Bay"
+  },
+  {
+    "id": "yt-tower-26",
+    "name": "Tower 26 - Houston Rail",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/wKLX7B3Q01Q",
+    "lat": 29.774823,
+    "lng": -95.346186,
+    "city": "Houston"
+  },
+  {
+    "id": "yt-bayou-vista",
+    "name": "Bayou Vista Bridge",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/R6mgkdG33Do",
+    "lat": 29.321162,
+    "lng": -94.939945,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam",
+    "name": "28th and Seawall",
+    "type": "hls",
+    "url": "https://usw01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.ranl5w.fd0.sm1.av1.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8",
+    "lat":  29.286239,
+    "lng": -94.794251,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam3",
+    "name": "Trinity Bay",
+    "type": "hls",
+    "url": "https://use01-smr04-relay.ozolio.com/hls-live/_definst_/relay01.uwqo1a.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w1967131251.m3u8",
+    "lat":  29.733415,
+    "lng": -94.838978,
+    "city": "Beach City"
+  },
+  {
+    "id": "hls-beach-cam2",
+    "name": "73rd and Seawall",
+    "type": "hls",
+    "url": "https://use01-smr03-relay.ozolio.com/hls-live/_definst_/relay01.vzcxdtz.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8",
+    "lat":  29.260594,
+    "lng": -94.837449,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam4",
+    "name": "61st and Seawall",
+    "type": "hls",
+    "url": "https://usw01-smr04-relay.ozolio.com/hls-live/_definst_/relay01.qghrexk.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w146961190.m3u8",
+    "lat":   29.266778,
+    "lng": -94.826793,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam5",
+    "name": "Galveston Skycam North",
+    "type": "hls",
+    "url": "https://use01-smr04-relay.ozolio.com/hls-live/_definst_/relay01.fjfebpl.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8",
+    "lat": 29.3069,
+    "lng": -94.7897,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam6",
+    "name": "Galveston Skycam South",
+    "type": "hls",
+    "url": "https://use01-smr04-relay.ozolio.com/hls-live/_definst_/relay01.yykibrj.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8",
+    "lat": 29.3069,
+    "lng": -94.7897,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam7",
+    "name": "Galveston Harbor",
+    "type": "hls",
+    "url": "https://usw01-smr05-relay.ozolio.com/hls-live/_definst_/relay01.zcsqd9k.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8",
+    "lat": 29.3080,
+    "lng": -94.7890,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam8",
+    "name": "Moody Gardens",
+    "type": "hls",
+    "url": "https://usw01-smr05-relay.ozolio.com/hls-live/_definst_/relay01.rizld68.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/playlist.m3u8",
+  "lat":   29.272863,
+    "lng": -94.851530,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam9",
+    "name": "43rd Street Beach",
+    "type": "hls",
+    "url": "https://use01-smr04-relay.ozolio.com/hll-live/_definst_/relay01.ovapeui.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w619340813.m3u8",
+    "lat": 29.2774,
+    "lng": -94.8090,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam10",
+    "name": "Galveston Causeway",
+    "type": "hls",
+    "url": "https://usw01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.xlfky2.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w1035850021.m3u8",
+    "lat": 29.2941,
+    "lng": -94.8847,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam11",
+    "name": "Palisade Palms",
+    "type": "hls",
+    "url": "https://usw01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.pwkfe85.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w2031995367.m3u8",
+    "lat": 29.316135,
+    "lng": -94.754168,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam12",
+    "name": "San Luis Pass",
+    "type": "hls",
+    "url": "https://usw01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.xjti3o.fd0.sm1.av1.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w2107119942.m3u8",
+    "lat": 29.0825,
+    "lng": -95.1216,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam13",
+    "name": "Seawolf Park",
+    "type": "hls",
+    "url": "https://use01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.cqot7f.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w1607512.m3u8",
+    "lat": 29.3352,
+    "lng": -94.7788,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam14",
+    "name": "Offats Bayou",
+    "type": "hls",
+    "url": "https://usw01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.jabldh7.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w1112147511.m3u8",
+    "lat": 29.2808,
+    "lng": -94.8577,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam15",
+    "name": "Clear Lake-Seabrook",
+    "type": "hls",
+    "url": "https://use01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.hccpbpg.fd0.sm1.av1.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w26053500.m3u8",
+    "lat": 29.5641,
+    "lng": -95.0255,
+    "city": "Clear Lake"
+  },
+  {
+    "id": "hls-beach-cam16",
+    "name": "Sylvan Beach Park",
+    "type": "hls",
+    "url": "https://usw01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.mtuvd2c.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w556856342.m3u8",
+    "lat": 29.6544,
+    "lng": -95.0097,
+    "city": "La Porte"
+  },
+  {
+    "id": "hls-beach-cam17",
+    "name": "Jamaica Beach",
+    "type": "hls",
+    "url": "https://use01-smr04-relay.ozolio.com/hll-live/_definst_/relay01.tlpeeto.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w843015671.m3u8",
+    "lat": 29.1897,
+    "lng": -94.9796,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam18",
+    "name": "Clear Lake Park",
+    "type": "hls",
+    "url": "https://usw01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.oojzd2w.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w54899063.m3u8",
+    "lat": 29.5650,
+    "lng": -95.0665,
+    "city": "Clear Lake"
+  },
+  {
+    "id": "hls-beach-cam19",
+    "name": "Lake Como",
+    "type": "hls",
+    "url": "https://use01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.tnezeud.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w2122635188.m3u8",
+    "lat": 32.7280,
+    "lng": -97.3994,
+    "city": "Fort Worth"
+  },
+  {
+    "id": "hls-beach-cam20",
+    "name": "Surfside Beach (Beach Front Bar)",
+    "type": "hls",
+    "url": "https://use01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.guztfck.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w870095777.m3u8",
+    "lat": 28.9583,
+    "lng": -95.2770,
+    "city": "Freeport"
+  },
+  {
+    "id": "hls-beach-cam21",
+    "name": "Surfside Jetty Park",
+    "type": "hls",
+    "url": "https://usw01-smr04-relay.ozolio.com/hll-live/_definst_/relay01.gdfgb97.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w115159119.m3u8",
+    "lat": 28.9392,
+    "lng": -95.2968,
+    "city": "Freeport"
+  },
+  {
+    "id": "hls-beach-cam22",
+    "name": "Tiki Island West",
+    "type": "hls",
+    "url": "https://use01-smr04-relay.ozolio.com/hll-live/_definst_/relay01.qvqlbv5.fd0.sm1.av1.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w1620551190.m3u8",
+    "lat": 29.2975,
+    "lng": -94.9145,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam23",
+    "name": "Surfside Beach (Seahorse Bar)",
+    "type": "hls",
+    "url": "https://use01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.soiebcj.fd0.sm1.av1.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w480161742.m3u8",
+    "lat": 28.9521,
+    "lng": -95.2844,
+    "city": "Freeport"
+  },
+  {
+    "id": "hls-beach-cam24",
+    "name": "Quintana Jetty",
+    "type": "hls",
+    "url": "https://use01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.wlaue67.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w1812824903.m3u8",
+    "lat": 28.9303,
+    "lng": -95.3059,
+    "city": "Freeport"
+  },
+  {
+    "id": "hls-beach-cam25",
+    "name": "Bolivar North Jetty",
+    "type": "hls",
+    "url": "https://usw01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.zavsd7m.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w305903506.m3u8",
+    "lat": 29.3536,
+    "lng": -94.7107,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam26",
+    "name": "91st St. Fishing Pier",
+    "type": "hls",
+    "url": "https://use01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.akxbbwy.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w587501634.m3u8",
+    "lat": 29.2513,
+    "lng": -94.8534,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam27",
+    "name": "61st St. Fishing Pier",
+    "type": "hls",
+    "url": "https://use01-smr05-relay.ozolio.com/hll-live/_definst_/relay01.wqysb9c.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w1253680972.m3u8",
+    "lat": 29.2660,
+    "lng": -94.8262,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-beach-cam28",
+    "name": "Galveston Boat Club",
+    "type": "hls",
+    "url": "https://usw01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.rwyjeu3.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w2071099564.m3u8",
+    "lat": 29.2750,
+    "lng": -94.8400,
+    "city": "Galveston"
+  },
+  {
+    "id": "hls-bordercam1",
+    "name": "Stanton Bridge US-Mexico Border",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/stantonbridge1.m3u8",
+    "lat": 31.7422,
+    "lng": -106.4763,
+    "city": "El Paso"
+  },
+  {
+    "id": "hls-bordercam2",
+    "name": "Stanton Bridge 2 US-Mexico Border",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/BridgeStanton2.m3u8",
+    "lat": 31.7422,
+    "lng": -106.4763,
+    "city": "El Paso"
+  },
+  {
+    "id": "hls-bordercam3",
+    "name": "Stanton Bridge 3 US-Mexico Border",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/BridgeStanton3.m3u8",
+    "lat": 31.7422,
+    "lng": -106.4763,
+    "city": "El Paso"
+  },
+  {
+    "id": "hls-bordercam4",
+    "name": "Paso Del Norte Bridge US-Mexico Border",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/bridgepdn1.m3u8",
+    "lat": 31.7419,
+    "lng": -106.4855,
+    "city": "El Paso"
+  },
+  {
+    "id": "hls-bordercam5",
+    "name": "Paso Del Norte Bridge Walkway",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/bridgesantafe3.m3u8",
+    "lat": 31.7419,
+    "lng": -106.4855,
+    "city": "El Paso"
+  },
+  {
+    "id": "hls-bordercam6",
+    "name": "Paso Del Norte Bridge Walkway 2",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/bridgesantafe4.m3u8",
+    "lat": 31.7419,
+    "lng": -106.4855,
+    "city": "El Paso"
+  },
+  {
+    "id": "hls-bordercam7",
+    "name": "Zaragoza Bridge US-Mexico Border",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/BridgeZaragoza1.m3u8",
+    "lat": 31.6689,
+    "lng": -106.3362,
+    "city": "El Paso"
+  },
+  {
+    "id": "hls-bordercam8",
+    "name": "Zaragoza Bridge 2 US-Mexico Border",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/BridgeZaragoza2.m3u8",
+    "lat": 31.6689,
+    "lng": -106.3362,
+    "city": "El Paso"
+  },
+  {
+    "id": "hls-bordercam9",
+    "name": "Zaragoza Bridge 3 US-Mexico Border",
+    "type": "hls",
+    "url": "https://zoocams.elpasozoo.org/BridgeZaragoza3.m3u8",
+    "lat": 31.6689,
+    "lng": -106.3362,
+    "city": "El Paso"
+  },
+  {
+    "id": "yt-border-pasodelnorte",
+    "name": "Paso Del Norte Mexico-US Border",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/0Pg3S6s76IE",
+    "lat": 31.7419,
+    "lng": -106.4855,
+    "city": "El Paso"
+  },
+  {
+    "id": "yt-border-zara",
+    "name": "Zaragoza Vista Norte Mexico-US Border",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/707L8Qkhh9E",
+    "lat": 31.6689,
+    "lng": -106.3362,
+    "city": "El Paso"
+  },
+  {
+    "id": "yt-border-c1",
+    "name": "Cordova North Mexico-US Border",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/mp3RS0y77tY",
+    "lat": 31.7588,
+    "lng": -106.4508,
+    "city": "El Paso"
+  },
+  {
+    "id": "yt-border-c2",
+    "name": "Cordova South Mexico-US Border",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/CZM5TpXLzE8",
+    "lat": 31.7588,
+    "lng": -106.4508,
+    "city": "El Paso"
+  },
+  {
+    "id":"hls-collegecam1",
+    "name": "Texas State University",
+    "type": "hls",
+    "url": "https://d2twjrp039cx06.cloudfront.net/lc4_rtmp_1080/ngrp:sayujastreamna_bbf4744d-f2e2-49e0-a134-a71d057a43a7_1759332866051_all/chunklist_b3623380.m3u8dot",
+    "lat": 29.8868,
+    "lng": -97.9367,
+    "city": "San Marcos"
+  },
+  {
+    "id": "hls-beachcam43",
+    "name": "22nd and Strand",
+    "type": "hls",
+    "url": "https://usw01-smr03-relay.ozolio.com/hll-live/_definst_/relay01.qlyfdf9.fd0.sm1.av2.mt0.at0.as0.dv0.sh2.rt19793.rc0.edge.basic.stream/chunklist_w1503508760.m3u8",
+    "lat": 29.3075,
+    "lng": -94.7945,
+    "city": "Galveston"
+  },
+  {
+  "id": "mj-conroe-palms",
+  "name": "Lake Conroe - Palms Marina",
+  "type": "mjpeg",
+  "url": "https://lakeconroe.com/?lc_ptzvc_mjpg=CamPalms&mode=day",
+  "lat": 30.3580,
+  "lng": -95.5710,
+  "city": "Conroe"
+},
+{
+  "id": "mj-conroe-ezboat",
+  "name": "Lake Conroe - E-Z Boat Storage (Willis, TX)",
+  "type": "mjpeg",
+  "url": "https://lakeconroe.com/?lc_ptzvc_mjpg=CamEZ&mode=day",
+  "lat": 30.4893,
+  "lng": -95.5578,
+  "city": "Conroe"
+},
+{
+    "id": "yt-conroe-lake",
+    "name": "Lake Conroe Cam (ABC13)",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/TBqgCHRnTy4",
+    "lat": 30.3540,
+    "lng": -95.5562,
+    "city": "Conroe"
+  },
+  {
+  "id": "hls-hou-zoo-elephant",
+  "name": "Houston Zoo Elephant Cam",
+  "type": "hls",
+  "url": "https://dai.google.com/linear/hls/pa/event/GCiNkcdHTOSgsuXWpBHI_A/stream/f30e8daa-7fda-41b8-9375-db8d82ba20b8:CBF2/variant/1f8b16bb9fed5f327b8da898fbc2cb95/bandwidth/3643200.m3u8",
+  "lat": 29.7119,
+  "lng": -95.3889,
+  "city": "Houston"
+},
+{
+  "id": "hls-hou-miller-theater",
+  "name": "Houston Miller Outdoor Theatre",
+  "type": "hls",
+  "url": "https://dai.google.com/linear/hls/pa/event/pOHvpga6Tu66WaGpKLHCEA/stream/595109c1-3e48-4776-9768-580e59c83fb9:MRN2/variant/06d28592fa897f81b875bd9d2c6cca08/bandwidth/5359200.m3u8",
+  "lat": 29.7220,
+  "lng": -95.3900,
+  "city": "Houston"
+},
+{
+  "id": "hls-hou-tower1",
+  "name": "Houston Tower Cam",
+  "type": "hls",
+  "url": "https://video.hazcams.com/houston-tx-us-001/main_stream.m3u8",
+  "lat": 29.6911,
+  "lng": -95.5266,
+  "city": "Houston"
+},
+{
+  "id": "hls-hou-tower2",
+  "name": "Houston Tower Cam 2",
+  "type": "hls",
+  "url": "https://dai.google.com/linear/hls/pa/event/AMy27GmhQRSpgKgYZ-MHGA/stream/e10dcbfd-6d54-4765-854e-f5c671cbe32e:CBF2/variant/2eb5490768369ac168dd47d48ae024bf/bandwidth/5359200.m3u8",
+  "lat": 29.6927,
+  "lng": -95.5241,
+  "city": "Houston"
+},
+{
+  "id": "hls-kamr-amarillo-roymccoy",
+  "name": "Roy McCoy Downtown Tower Camera",
+  "type": "hls",
+  "url": "https://svrnexstar.videstra.live/hls_output/a5e3cae2-d141-4018-b009-b14f7f18f49d_uUNEjmHAEAapAMJZeep6pR8Qno816IIt7i2PgR7qCryJ_6-ubl5aWBIxp0wfs9hV/index.m3u8",
+  "embed": "https://plynexstar.videstra.live/?id=a5e3cae2-d141-4018-b009-b14f7f18f49d&token=uUNEjmHAEAapAMJZeep6pR8Qno816IIt7i2PgR7qCryJ_6-ubl5aWBIxp0wfs9hV",
+  "lat": 35.2220,
+  "lng": -101.8313,
+  "city": "Amarillo",
+  "state": "Texas"
+},
+{
+  "id": "hls-kamr-amarillo-watertower",
+  "name": "Water Tower Camera",
+  "type": "hls",
+  "url": "https://svrnexstar.videstra.live/hls_output/11063f8a-ad0a-416f-b970-653846d92a17_RAUly2MZlcvV34Ng9Xa4lhqCnmDzOlvF4TDM9JTqpnqRkmS6mKllYFZuSKFU0kJS/index.m3u8",
+  "embed": "https://plynexstar.videstra.live/?id=11063f8a-ad0a-416f-b970-653846d92a17&token=RAUly2MZlcvV34Ng9Xa4lhqCnmDzOlvF4TDM9JTqpnqRkmS6mKllYFZuSKFU0kJS",
+  "lat": 35.1900,
+  "lng": -101.8100,
+  "city": "Amarillo",
+  "state": "Texas"
+},
+{
+  "id": "hls-kamr-pampa-tower",
+  "name": "Pampa Tower Camera",
+  "type": "hls",
+  "url": "https://svrnexstar.videstra.live/hls_output/8d575f5d-1c66-4ad3-a629-31469a90fe6b_XiMyZWY7wUjLR1rr6fBEma-qW9N09N7bX16uoxYsEN3yLqLHL50huigmbhMmDIoM/index.m3u8",
+  "embed": "https://plynexstar.videstra.live/?id=8d575f5d-1c66-4ad3-a629-31469a90fe6b&token=XiMyZWY7wUjLR1rr6fBEma-qW9N09N7bX16uoxYsEN3yLqLHL50huigmbhMmDIoM",
+  "lat": 35.5360,
+  "lng": -100.9597,
+  "city": "Pampa",
+  "state": "Texas"
+},
+{
+  "id": "hls-kamr-clarendon-tower",
+  "name": "Clarendon Tower Camera",
+  "type": "hls",
+  "url": "https://svrnexstar.videstra.live/hls_output/f8d15211-9325-471b-a8bc-b1aac35b6042_GD2tCijh60GcVzDxQawn59W55YcxUdI4_-x2WZc6uvg6dL3_vsUec3j64I_tSHmT/index.m3u8",
+  "embed": "https://plynexstar.videstra.live/?id=f8d15211-9325-471b-a8bc-b1aac35b6042&token=GD2tCijh60GcVzDxQawn59W55YcxUdI4_-x2WZc6uvg6dL3_vsUec3j64I_tSHmT",
+  "lat": 34.9375,
+  "lng": -100.8882,
+  "city": "Clarendon",
+  "state": "Texas"
+},
+{
+  "id": "hls-kamr-clovis-tower",
+  "name": "Clovis, New Mexico Tower Camera",
+  "type": "hls",
+  "url": "https://svrnexstar.videstra.live/hls_output/0a5302c6-a989-40a3-85da-9621c2592a33_yQ_K5rudpopq45r8F1uEBGe4IHE8rPtEUZfTjssXOmeEM1TxkoapH-sQHs20Lq63/index.m3u8",
+  "embed": "https://plynexstar.videstra.live/?id=0a5302c6-a989-40a3-85da-9621c2592a33&token=yQ_K5rudpopq45r8F1uEBGe4IHE8rPtEUZfTjssXOmeEM1TxkoapH-sQHs20Lq63",
+  "lat": 34.4048,
+  "lng": -103.2052,
+  "city": "Clovis",
+  "state": "New Mexico"
+},
+{
+  "id": "hls-kamr-guymon-tower",
+  "name": "Guymon, Oklahoma Tower Camera",
+  "type": "hls",
+  "url": "https://svrnexstar.videstra.live/hls_output/00d2fc0e-516d-4e93-97cb-1de9a52f001f_RcsprSN1S2bCZS2nz8_JhNNuBYrYkb2b-wb-Y43IkNCDenh87breX4rsMw2ulLqF/index.m3u8",
+  "embed": "https://plynexstar.videstra.live/?id=00d2fc0e-516d-4e93-97cb-1de9a52f001f&token=RcsprSN1S2bCZS2nz8_JhNNuBYrYkb2b-wb-Y43IkNCDenh87breX4rsMw2ulLqF",
+  "lat": 36.6892,
+  "lng": -101.4816,
+  "city": "Guymon",
+  "state": "Oklahoma"
+},
+{
+    "id": "em-collstation-aplin",
+    "name": "Texas A&M Aplin Center Construction Cam",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/vl45KkF-vq4",
+    "lat": 30.6102,
+    "lng": -96.3405,
+    "city": "College Station",
+    "state":"Texas"
+  },
+  {
+    "id": "em-lakeway-laketravis-oasis",
+    "name": "Lake Travis Oasis on the Lake Cam",
+    "type": "hls",
+    "url": "https://streamer6.brownrice.com/oasislaketravis/oasislaketravis.stream/main_playlist.m3u8",
+    "lat": 30.4054,
+    "lng": -97.9253,
+    "city": "Lakeway",
+    "state": "Texas"
+  },
+  {
+    "id": "ec-lakeway-laketravis",
+    "name": "Lake Travis Cam",
+    "type": "hls",
+    "url": "https://videos-3.earthcam.com/fecnetwork/16560.flv/playlist.m3u8?t=WPN7zE0bLoF1FoFDzyMc6o%2BxtlEqaddE6OkIX6wWwnjfQGr2%2BBTJ%2FVuGOsmF38%2Bm&td=202603092329",
+    "lat": 30.3644,
+    "lng": -97.9800,
+    "city": "Lakeway",
+    "state": "Texas"
+  },
+  {"id": "yt-sm-hopkins-charles-austin", "name": "Hopkins @ Charles Austin", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/qRYILPnsOns", "lat": 29.8860, "lng": -97.9280, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-hopkins-lbj", "name": "Hopkins @ LBJ", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/tDFokEet4Ys", "lat": 29.8832, "lng": -97.9402, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-post-uhland", "name": "Post @ Uhland", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/0hhjsyXRHGA", "lat": 29.8991, "lng": -97.9189, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-hopkins-moore", "name": "Hopkins Street @ Moore Street", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/Qj6osxu6XVI", "lat": 29.8822, "lng": -97.9461, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-sh123-broadway", "name": "SH123 @ Broadway", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/MUQJubAnBmI", "lat": 29.8596, "lng": -97.9393, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-thorpe-robbie", "name": "Thorpe @ Robbie", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/v6USKejtl_k", "lat": 29.8868, "lng": -97.9246, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-aquarena-thorpe", "name": "Aquarena Springs @ Thorpe", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/bYd6ChdCblg", "lat": 29.8928, "lng": -97.9182, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-aquarena-charles-austin", "name": "Aquarena Springs @ Charles Austin", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/fiUqVsMR8z4", "lat": 29.8896, "lng": -97.9317, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-aquarena-post", "name": "Aquarena Springs Drive @ Post Road", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/MYNXvJGw0NE", "lat": 29.8900, "lng": -97.9308, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-hopkins-thorpe", "name": "Hopkins @ Thorpe", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/xdWLJzOlMUI", "lat": 29.8856, "lng": -97.9259, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-sessom-comanche", "name": "Sessom @ Comanche", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/wMsY4Sj9ljg", "lat": 29.8900, "lng": -97.9483, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-centerpoint-outlet-mall", "name": "Centerpoint Road @ Outlet Mall", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/N26hFIoFUx0", "lat": 29.8279, "lng": -97.9858, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-ih35-centerpoint", "name": "IH 35 @ Centerpoint Road", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/xaWNXMnrNcw", "lat": 29.8279, "lng": -97.9858, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-ih35-wonder-world", "name": "IH 35 @ Wonder World Drive", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/4Uwmss-8J5I", "lat": 29.8571, "lng": -97.9534, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-aquarena-sessom", "name": "Aquarena Springs Drive @ Sessom Drive", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/S_o0_F9BiuY", "lat": 29.8890, "lng": -97.9345, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-hopkins-guadalupe", "name": "Hopkins Street @ Guadalupe Street", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/E8LsKcVpL5A", "lat": 29.8831, "lng": -97.9415, "city": "San Marcos", "state": "Texas"},
+{"id": "yt-sm-wonder-world-hunter", "name": "Wonder World Drive @ Hunter Road", "type": "youtube", "url": "https://www.youtube-nocookie.com/embed/qQBQSK7nDd4", "lat": 29.8656, "lng": -97.9633, "city": "San Marcos", "state": "Texas"},
+{
+    "id": "yt-hou-abc13-city",
+    "name": "Houston ABC13 Tower Cam (City View)",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/SDK_m1_BVJ4",
+    "lat": 29.7264,
+    "lng": -95.4292,
+    "city": "Houston",
+    "state": "Texas"
+  },
+  {
+    "id": "yt-hou-abc13-skyline",
+    "name": "Houston ABC13 Downtown Skyline Cam",
+    "type": "youtube",
+    "url": "https://www.youtube-nocookie.com/embed/wUQc3RoLAPs",
+    "lat": 29.7264,
+    "lng": -95.4292,
+    "city": "Houston",
+    "state": "Texas"
+  }
+]

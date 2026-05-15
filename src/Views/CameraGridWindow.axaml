@@ -1,0 +1,91 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CoastalCommandCenter.Views.CameraGridWindow"
+        Title="Camera Grid"
+        Width="560" Height="450"
+        MinWidth="560" MinHeight="450"
+        CanResize="True"
+        SystemDecorations="None"
+        Background="{DynamicResource BrushPopoutWindowBackground}"
+        Topmost="True"
+        WindowStartupLocation="Manual"
+        UseLayoutRounding="True">
+
+  <Border BorderBrush="{DynamicResource BrushPopoutBorder}" BorderThickness="1">
+    <Grid RowDefinitions="30,*">
+
+    <!-- Drag handle / title bar -->
+    <Border Grid.Row="0"
+            Background="{DynamicResource BrushPopoutTitleBarBackground}"
+            Cursor="SizeAll"
+            PointerPressed="TitleBar_OnPointerPressed"
+            PointerMoved="TitleBar_OnPointerMoved"
+            PointerReleased="TitleBar_OnPointerReleased">
+      <Grid ColumnDefinitions="*,Auto,Auto">
+        <TextBlock Grid.Column="0"
+                   x:Name="GridTitleText"
+                   VerticalAlignment="Center"
+                   Margin="8,0"
+                   FontSize="12"
+                   FontFamily="Rajdhani, Tahoma, sans-serif"
+                   FontWeight="SemiBold"
+                   LetterSpacing="0.5"
+                   Foreground="{DynamicResource BrushPopoutTitleForeground}"
+                   Text="◢ CAMERA GRID" />
+        <Button Grid.Column="1"
+                x:Name="FullscreenButton"
+                Content="⛶"
+                FontSize="13"
+                Width="30" Height="30"
+                Background="Transparent"
+                Foreground="{DynamicResource BrushPopoutTitleForeground}"
+                BorderThickness="0"
+                VerticalAlignment="Center"
+                ToolTip.Tip="Toggle fullscreen (F11)"
+                Click="FullscreenButton_OnClick" />
+        <Button Grid.Column="2"
+                Content="✕"
+                FontSize="12"
+                Width="30" Height="30"
+                Background="Transparent"
+                Foreground="{DynamicResource BrushPopoutCloseForeground}"
+                BorderThickness="0"
+                VerticalAlignment="Center"
+                ToolTip.Tip="Close grid"
+                Click="CloseButton_OnClick" />
+      </Grid>
+    </Border>
+
+    <!-- Camera canvas — tiles are positioned absolutely by CameraGridManager.
+         HorizontalAlignment/VerticalAlignment=Stretch lets it fill the row. -->
+    <Canvas Grid.Row="1"
+            x:Name="CameraCanvas"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="{DynamicResource BrushPopoutWindowBackground}"
+            RenderOptions.BitmapInterpolationMode="LowQuality" />
+
+    <Border x:Name="ResizeGrip"
+            Grid.RowSpan="2"
+            Width="18"
+            Height="18"
+            Margin="0,0,6,6"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Visual.ZIndex="10"
+            Background="{DynamicResource BrushPopoutTileHeaderBackground}"
+            CornerRadius="2"
+            Opacity="0.65"
+            PointerPressed="ResizeGrip_OnPointerPressed">
+      <TextBlock HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 FontSize="11"
+                 FontWeight="Bold"
+                 Foreground="{DynamicResource BrushPopoutTitleForeground}"
+                 Text="◢" />
+    </Border>
+
+
+    </Grid>
+  </Border>
+</Window>

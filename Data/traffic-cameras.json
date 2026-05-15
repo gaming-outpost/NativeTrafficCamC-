@@ -1,0 +1,426 @@
+[
+    {
+        "id": 1,
+        "name": "IH-45 N @ Tidwell",
+        "location": "Houston North",
+        "lat": 29.8339,
+        "lng": -95.3626,
+        "camId": 166,
+        "type": "transtar"
+    },
+    {
+        "id": 2,
+        "name": "IH-45 N @ Beltway 8",
+        "location": "Houston North",
+        "lat": 29.8654,
+        "lng": -95.3568,
+        "camId": 170,
+        "type": "transtar"
+    },
+    {
+        "id": 3,
+        "name": "IH-10 W @ Washington Ave",
+        "location": "Houston West",
+        "lat": 29.7685,
+        "lng": -95.388,
+        "camId": 551,
+        "type": "transtar"
+    },
+    {
+        "id": 4,
+        "name": "US-59 S @ Chimney Rock",
+        "location": "Houston Southwest",
+        "lat": 29.7227,
+        "lng": -95.4764,
+        "camId": 620,
+        "type": "transtar"
+    },
+    {
+        "id": 5,
+        "name": "IH-610 @ Galleria",
+        "location": "Houston Loop",
+        "lat": 29.7381,
+        "lng": -95.4596,
+        "camId": 750,
+        "type": "transtar"
+    },
+    {
+        "id": 6,
+        "name": "SH-6 @ FM-2004",
+        "location": "Hitchcock",
+        "lat": 29.352608,
+        "lng": -95.030652,
+        "camId": 1926,
+        "type": "transtar"
+    },
+    {
+        "id": 7,
+        "name": "SH-6 @ FM-1764",
+        "location": "Santa Fe",
+        "lat": 29.380783,
+        "lng": -95.112359,
+        "camId": 1927,
+        "type": "transtar"
+    },
+    {
+        "id": 8,
+        "name": "SH-6 @ FM-519",
+        "location": "Hitchcock",
+        "lat": 29.348378,
+        "lng": -95.016159,
+        "camId": 1928,
+        "type": "transtar"
+    },
+    {
+        "id": 9,
+        "name": "SH-6 @ FM-646 North",
+        "location": "Santa Fe",
+        "lat": 29.372685,
+        "lng": -95.089597,
+        "camId": 1924,
+        "type": "transtar"
+    },
+    {
+        "id": 10,
+        "name": "IH-45 Gulf @ FM-517",
+        "location": "Dickinson",
+        "lat": 29.448685,
+        "lng": -95.077344,
+        "camId": 139,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_038/chunklist_w1061224100.m3u8"
+    },
+    {
+        "id": 11,
+        "name": "IH-45 Gulf @ 61st East",
+        "location": "Galveston",
+        "lat": 29.288754,
+        "lng": -94.837489,
+        "camId": 174,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_074/chunklist_w911412942.m3u8"
+    },
+    {
+        "id": 12,
+        "name": "IH-45 Gulf @ 61st West",
+        "location": "Galveston",
+        "lat": 29.288413,
+        "lng": -94.838475,
+        "camId": 173,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_073/chunklist_w1953705474.m3u8"
+    },
+    {
+        "id": 13,
+        "name": "IH-45 Gulf @ Harborside Dr East",
+        "location": "Galveston",
+        "lat": 29.285477,
+        "lng": -94.862659,
+        "camId": 170,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_070/chunklist_w365555732.m3u8"
+    },
+    {
+        "id": 14,
+        "name": "IH-45 Gulf @ Harborside Dr West",
+        "location": "Galveston",
+        "lat": 29.28522,
+        "lng": -94.863456,
+        "camId": 169,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_069/chunklist_w1656623609.m3u8"
+    },
+    {
+        "id": 15,
+        "name": "IH-45 Gulf @ Causeway West",
+        "location": "Galveston",
+        "lat": 29.290893,
+        "lng": -94.876724,
+        "camId": 166,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_066/chunklist_w946905979.m3u8"
+    },
+    {
+        "id": 16,
+        "name": "IH-45 Gulf @ Causeway South",
+        "location": "Galveston",
+        "lat": 29.29553,
+        "lng": -94.88574,
+        "camId": 165,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_065/chunklist_w219737777.m3u8"
+    },
+    {
+        "id": 17,
+        "name": "IH-45 Gulf @ Causeway North",
+        "location": "Galveston",
+        "lat": 29.30145,
+        "lng": -94.89785,
+        "camId": 164,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_064/chunklist_w555365474.m3u8"
+    },
+    {
+        "id": 18,
+        "name": "IH-45 Gulf @ Lewis Lane East",
+        "location": "Galveston",
+        "lat": 29.28715,
+        "lng": -94.86958,
+        "camId": 167,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_067/chunklist_w1396838708.m3u8"
+    },
+    {
+        "id": 19,
+        "name": "IH-45 Gulf @ Lewis Lane West",
+        "location": "Galveston",
+        "lat": 29.28763,
+        "lng": -94.86956,
+        "camId": 168,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_068/chunklist_w1682258395.m3u8"
+    },
+    {
+        "id": 20,
+        "name": "IH-45 Gulf @ Tiki Island",
+        "location": "Galveston",
+        "lat": 29.30481,
+        "lng": -94.90243,
+        "camId": 163,
+        "type": "transtar"
+    },
+    {
+        "id": 21,
+        "name": "IH-45 Gulf @ Santa Fe Railway N",
+        "location": "Galveston",
+        "lat": 29.30482,
+        "lng": -94.90244,
+        "camId": 161,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_062/chunklist_w2117444880.m3u8"
+    },
+    {
+        "id": 22,
+        "name": "IH-45 Gulf @ FM-146 North",
+        "location": "La Marque",
+        "lat": 29.33591,
+        "lng": -94.94015,
+        "camId": 157,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_057/chunklist_w1052872635.m3u8"
+    },
+    {
+        "id": 23,
+        "name": "IH-45 Gulf @ FM-519",
+        "location": "La Marque",
+        "lat": 29.35714,
+        "lng": -94.97294,
+        "camId": 153,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_054/chunklist_w234682443.m3u8"
+    },
+    {
+        "id": 24,
+        "name": "IH-45 Gulf @ Vauthier",
+        "location": "La Marque",
+        "lat": 29.366667,
+        "lng": -94.992778,
+        "camId": 157,
+        "type": "transtar"
+    },
+    {
+        "id": 25,
+        "name": "IH-45 Gulf @ Delany",
+        "location": "Texas City",
+        "lat": 29.390278,
+        "lng": -95.020278,
+        "camId": 147,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_047/chunklist_w1363112807.m3u8"
+    },
+    {
+        "id": 26,
+        "name": "IH-45 Gulf @ FM-2004",
+        "location": "Texas City",
+        "lat": 29.395669,
+        "lng": -95.025263,
+        "camId": 147,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_046/chunklist_w1443751010.m3u8"
+    },
+    {
+        "id": 27,
+        "name": "IH-45 Gulf @ Holland Rd",
+        "location": "Texas City",
+        "lat": 29.43476,
+        "lng": -95.0638,
+        "camId": 141,
+        "type": "transtar"
+    },
+    {
+        "id": 28,
+        "name": "IH-45 Gulf @ Hughes Rd",
+        "location": "Dickinson",
+        "lat": 29.441823,
+        "lng": -95.070498,
+        "camId": 140,
+        "type": "transtar"
+    },
+    {
+        "id": 29,
+        "name": "IH-45 Gulf @ FM-646",
+        "location": "Dickinson",
+        "lat": 29.466536,
+        "lng": -95.090769,
+        "camId": 137,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_037/chunklist_w1852541372.m3u8"
+    },
+    {
+        "id": 30,
+        "name": "IH-45 Gulf @ FM-646 North",
+        "location": "Dickinson",
+        "lat": 29.472399,
+        "lng": -95.095417,
+        "camId": 136,
+        "type": "transtar"
+    },
+    {
+        "id": 31,
+        "name": "IH-45 Gulf @ Calder South",
+        "location": "League City",
+        "lat": 29.482571,
+        "lng": -95.101247,
+        "camId": 135,
+        "type": "transtar"
+    },
+    {
+        "id": 32,
+        "name": "IH-45 Gulf @ Calder",
+        "location": "League City",
+        "lat": 29.489179,
+        "lng": -95.105437,
+        "camId": 134,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_034/chunklist_w469750581.m3u8"
+    },
+    {
+        "id": 33,
+        "name": "IH-45 Gulf @ FM-518 North",
+        "location": "League City",
+        "lat": 29.511309,
+        "lng": -95.119264,
+        "camId": 132,
+        "type": "transtar"
+    },
+    {
+        "id": 34,
+        "name": "IH-45 Gulf @ Nasa Rd 1 South",
+        "location": "Webster",
+        "lat": 29.521313,
+        "lng": -95.124186,
+        "camId": 131,
+        "type": "transtar"
+    },
+    {
+        "id": 35,
+        "name": "IH-45 Gulf @ Nasa Rd 1",
+        "location": "Webster",
+        "lat": 29.521313,
+        "lng": -95.124186,
+        "camId": 130,
+        "type": "transtar"
+    },
+    {
+        "id": 36,
+        "name": "IH-45 Gulf @ Bay Area Blvd",
+        "location": "Webster",
+        "lat": 29.541952,
+        "lng": -95.143366,
+        "camId": 129,
+        "type": "transtar"
+    },
+    {
+        "id": 37,
+        "name": "IH-45 Gulf @ El Dorado",
+        "location": "Webster",
+        "lat": 29.553437,
+        "lng": -95.154407,
+        "camId": 129,
+        "type": "transtar"
+    },
+    {
+        "id": 38,
+        "name": "SH-6 @ CR-149",
+        "location": "Alvin",
+        "lat": 29.438756,
+        "lng": -95.271817,
+        "camId": 1919,
+        "type": "transtar"
+    },
+    {
+        "id": 39,
+        "name": "Galveston Ferry Landing",
+        "location": "Galveston",
+        "lat": 29.327813,
+        "lng": -94.772635,
+        "camId": 180,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_080/chunklist_w916655866.m3u8"
+    },
+    {
+        "id": 40,
+        "name": "Galveston Ferry @ Tarpon Ave",
+        "location": "Galveston",
+        "lat": 29.321292,
+        "lng": -94.770596,
+        "camId": 179,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_079/chunklist_w675520548.m3u8"
+    },
+    {
+        "id": 41,
+        "name": "IH-45 Gulf @ FM-1764",
+        "location": "Texas City",
+        "lat": 29.40677,
+        "lng": -95.03743,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_044/chunklist_w924513844.m3u8"
+    },
+    {
+        "id": 42,
+        "name": "IH-45 Gulf @ 71st West",
+        "location": "Galveston",
+        "lat": 29.2904,
+        "lng": -94.8462,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_071/chunklist_w105252281.m3u8"
+    },
+    {
+        "id": 43,
+        "name": "IH-45 Gulf @ 71st East",
+        "location": "Galveston",
+        "lat": 29.2904,
+        "lng": -94.8462,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_072/chunklist_w1829429616.m3u8"
+    },
+    {
+        "id": 44,
+        "name": "Galveston Ferry @ Harborside",
+        "location": "Galveston",
+        "lat": 29.314308,
+        "lng": -94.770701,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_077/chunklist_w631056313.m3u8"
+    },
+    {
+        "id": 45,
+        "name": "Galveston Ferry @ Dolphin Ave",
+        "location": "Galveston",
+        "lat": 29.317825,
+        "lng": -94.769524,
+        "type": "transtar",
+        "hlsUrl": "https://s72.us-east-1.skyvdn.com/rtplive/TX_HOU_078/chunklist_w1793660860.m3u8"
+    }
+]

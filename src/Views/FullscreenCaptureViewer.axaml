@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CoastalCommandCenter.ViewModels"
+             x:Class="CoastalCommandCenter.Views.FullscreenCaptureViewer"
+             x:DataType="vm:MainViewModel">
+
+  <Grid Background="{DynamicResource BrushWindowBg}">
+
+    <!-- Zoom/pan viewport -->
+    <Border x:Name="ViewportBorder"
+            ClipToBounds="True"
+            Cursor="Hand"
+            PointerWheelChanged="OnPointerWheelChanged"
+            PointerPressed="OnPointerPressed"
+            PointerMoved="OnPointerMoved"
+            PointerReleased="OnPointerReleased">
+      <Image x:Name="CaptureImage"
+             Source="{Binding SelectedCapture.Thumbnail}"
+             Stretch="None"
+             HorizontalAlignment="Left"
+             VerticalAlignment="Top" />
+    </Border>
+
+    <!-- ── Top bar ─────────────────────────────────────── -->
+
+    <!-- Close button (top-right) -->
+    <Button Content="✕"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="12"
+            Padding="10,4"
+            ZIndex="10"
+            Command="{Binding CloseCaptureCommand}" />
+
+    <!-- ── Side navigation arrows ─────────────────────── -->
+
+    <Button Content="❮"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="8,0,0,0"
+            Padding="10,14"
+            FontSize="18"
+            ZIndex="10"
+            Command="{Binding NavigatePreviousCaptureCommand}" />
+
+    <Button Content="❯"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Margin="0,0,8,0"
+            Padding="10,14"
+            FontSize="18"
+            ZIndex="10"
+            Command="{Binding NavigateNextCaptureCommand}" />
+
+    <!-- ── Bottom bar ──────────────────────────────────── -->
+
+    <!-- Capture metadata (bottom-left) -->
+    <StackPanel VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="14,0,0,14"
+                Spacing="2"
+                ZIndex="10"
+                IsHitTestVisible="False">
+      <TextBlock Classes="sysmon-section-title"
+                 Text="{Binding SelectedCapture.CameraName}" />
+      <TextBlock Classes="sysmon-text"
+                 Text="{Binding SelectedCapture.Region}" />
+      <TextBlock Classes="sysmon-dim"
+                 Text="{Binding SelectedCapture.DisplayTimestamp}" />
+    </StackPanel>
+
+    <!-- Zoom controls (bottom-right) -->
+    <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0,0,14,14"
+                Spacing="2"
+                ZIndex="10">
+      <Button Content="+"
+              Width="32" Height="32"
+              Padding="0"
+              FontSize="18"
+              HorizontalContentAlignment="Center"
+              Click="OnZoomInClick" />
+      <Button Content="−"
+              Width="32" Height="32"
+              Padding="0"
+              FontSize="18"
+              HorizontalContentAlignment="Center"
+              Click="OnZoomOutClick" />
+    </StackPanel>
+
+  </Grid>
+
+</UserControl>

@@ -1,0 +1,63 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:media="using:Avalonia.Media"
+             x:Class="CoastalCommandCenter.App"
+             RequestedThemeVariant="Light">
+
+    <Application.Resources>
+        <!-- ═══ Background surfaces ═══ -->
+        <!-- Light: Windows XP silver / Ghidra  |  Dark: Eclipse Darcula -->
+        <media:SolidColorBrush x:Key="BrushAppBg"    Color="#d4d0c8" />
+        <media:SolidColorBrush x:Key="BrushPanelBg"  Color="#ece9d8" />
+        <media:SolidColorBrush x:Key="BrushWindowBg" Color="#ffffff"  />
+        <media:SolidColorBrush x:Key="BrushTitleBar" Color="#0a246a"  />
+        <media:SolidColorBrush x:Key="BrushMenuBg"   Color="#d4d0c8"  />
+
+        <!-- ═══ Text ═══ -->
+        <media:SolidColorBrush x:Key="BrushText"      Color="#000000" />
+        <media:SolidColorBrush x:Key="BrushTextDim"   Color="#444444" />
+        <media:SolidColorBrush x:Key="BrushTextTitle" Color="#ffffff"  />
+
+        <!-- ═══ Selection ═══ -->
+        <media:SolidColorBrush x:Key="BrushSelBg"   Color="#0a246a" />
+        <media:SolidColorBrush x:Key="BrushSelText" Color="#ffffff"  />
+
+        <!-- ═══ Borders / inputs / buttons ═══ -->
+        <media:SolidColorBrush x:Key="BrushBorder"  Color="#808080" />
+        <media:SolidColorBrush x:Key="BrushInputBg" Color="#ffffff"  />
+        <media:SolidColorBrush x:Key="BrushBtnBg"   Color="#d4d0c8"  />
+
+        <!-- ═══ Bevel helpers ═══ -->
+        <!-- Raised bevel: top-left BrushBevelHigh, bottom-right BrushBevelShad -->
+        <!-- Sunken bevel: top-left BrushFieldHigh, bottom-right BrushFieldShad -->
+        <media:SolidColorBrush x:Key="BrushBevelHigh" Color="#ffffff" />
+        <media:SolidColorBrush x:Key="BrushBevelShad" Color="#808080" />
+        <media:SolidColorBrush x:Key="BrushFieldHigh" Color="#808080" />
+        <media:SolidColorBrush x:Key="BrushFieldShad" Color="#dfdfdf" />
+
+        <!-- ═══ Status dots ═══ -->
+        <media:SolidColorBrush x:Key="BrushLiveDot"  Color="#00aa00" />
+        <media:SolidColorBrush x:Key="BrushWarnDot"  Color="#cc6600" />
+        <media:SolidColorBrush x:Key="BrushOffDot"   Color="#888888"  />
+
+        <!-- ═══ Popout / floating window brushes ═══ -->
+        <media:SolidColorBrush x:Key="BrushEmbeddedGridBackground"      Color="#1e1e1e" />
+        <media:SolidColorBrush x:Key="BrushPopoutWindowBackground"      Color="#1c1c2a" />
+        <media:SolidColorBrush x:Key="BrushPopoutTitleBarBackground"    Color="#0f3460" />
+        <media:SolidColorBrush x:Key="BrushPopoutTileHeaderBackground"  Color="#0d2137" />
+        <media:SolidColorBrush x:Key="BrushPopoutTitleForeground"       Color="#e0e0e0" />
+        <media:SolidColorBrush x:Key="BrushPopoutCloseForeground"       Color="#e0e0e0" />
+        <media:SolidColorBrush x:Key="BrushPopoutBorder"                Color="#2d6099" />
+        <media:SolidColorBrush x:Key="BrushPopoutLabelText"             Color="#888888" />
+        <media:SolidColorBrush x:Key="BrushPopoutOverlayBackground"     Color="#80000000" />
+        <media:SolidColorBrush x:Key="BrushTextWhite"                   Color="#ffffff" />
+        <media:SolidColorBrush x:Key="BrushTextSubtle"                  Color="#444444" />
+        <media:SolidColorBrush x:Key="BrushAccentSecondary"             Color="#0a246a" />
+        <media:SolidColorBrush x:Key="BrushDangerSecondary"             Color="#cc0000" />
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://CoastalCommandCenter/Themes/DefaultTheme.axaml" />
+    </Application.Styles>
+</Application>

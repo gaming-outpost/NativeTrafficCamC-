@@ -1,0 +1,148 @@
+[
+  {
+    "id": "highway-6",
+    "displayName": "Highway 6",
+    "refreshIntervalSeconds": 180,
+    "cameras": [
+      {
+        "id": "1923",
+        "name": "Camera 1923",
+        "baseSnapshotUrl": "https://www.houstontranstar.org/snapshots/cctv/1923.jpg"
+      },
+      {
+        "id": "1924",
+        "name": "Camera 1924",
+        "baseSnapshotUrl": "https://www.houstontranstar.org/snapshots/cctv/1924.jpg"
+      },
+      {
+        "id": "1927",
+        "name": "Camera 1927",
+        "baseSnapshotUrl": "https://www.houstontranstar.org/snapshots/cctv/1927.jpg"
+      }
+    ]
+  },
+  {
+    "id": "port-of-houston",
+    "displayName": "Port of Houston",
+    "refreshIntervalSeconds": 180,
+    "cameras": [
+      {
+        "id": "barbours-cut-pre-check",
+        "name": "Barbours Cut Pre-Check",
+        "group": "Port Feeds",
+        "location": "Barbours Cut Terminal",
+        "latitude": 29.6765,
+        "longitude": -94.9873,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bctprecheck.jpg"
+      },
+      {
+        "id": "bayport-in-gate",
+        "name": "Bayport In-Gate",
+        "group": "Port Feeds",
+        "location": "Bayport Terminal",
+        "latitude": 29.6242,
+        "longitude": -95.0118,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/Bay_ingate.jpg"
+      },
+      {
+        "id": "610-bridge-air-draft",
+        "name": "610 Bridge Air Draft",
+        "group": "Container Crane",
+        "location": "Ship Channel",
+        "latitude": 29.7480,
+        "longitude": -95.0830,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/Man1.jpg"
+      },
+      {
+        "id": "bct-wharf-7",
+        "name": "BCT Wharf 7",
+        "group": "Container Crane",
+        "location": "Barbours Cut Terminal",
+        "latitude": 29.6768,
+        "longitude": -94.9870,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bct_wharf_7.jpg"
+      },
+      {
+        "id": "bct-wharf-6",
+        "name": "BCT Wharf 6",
+        "group": "Container Crane",
+        "location": "Barbours Cut Terminal",
+        "latitude": 29.6766,
+        "longitude": -94.9872,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bct_wharf_6.jpg"
+      },
+      {
+        "id": "bct-wharf-3",
+        "name": "BCT Wharf 3",
+        "group": "Container Crane",
+        "location": "Barbours Cut Terminal",
+        "latitude": 29.6760,
+        "longitude": -94.9878,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bct_wharf_3.jpg"
+      },
+      {
+        "id": "bct-wharf-2",
+        "name": "BCT Wharf 2",
+        "group": "Container Crane",
+        "location": "Barbours Cut Terminal",
+        "latitude": 29.6758,
+        "longitude": -94.9880,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bct_wharf_2.jpg"
+      },
+      {
+        "id": "bct-wharf-1",
+        "name": "BCT Wharf 1",
+        "group": "Container Crane",
+        "location": "Barbours Cut Terminal",
+        "latitude": 29.6756,
+        "longitude": -94.9882,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bct_wharf_1.jpg"
+      },
+      {
+        "id": "bpt-wharf-6",
+        "name": "BPT Wharf 6",
+        "group": "Container Crane",
+        "location": "Bayport Terminal",
+        "latitude": 29.6245,
+        "longitude": -95.0115,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bpt_wharf_6.jpg"
+      },
+      {
+        "id": "bpt-wharf-5",
+        "name": "BPT Wharf 5",
+        "group": "Container Crane",
+        "location": "Bayport Terminal",
+        "latitude": 29.6243,
+        "longitude": -95.0116,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bpt_wharf_5.jpg"
+      },
+      {
+        "id": "bpt-wharf-4",
+        "name": "BPT Wharf 4",
+        "group": "Container Crane",
+        "location": "Bayport Terminal",
+        "latitude": 29.6241,
+        "longitude": -95.0117,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bpt_wharf_4.jpg"
+      },
+      {
+        "id": "bpt-wharf-3",
+        "name": "BPT Wharf 3",
+        "group": "Container Crane",
+        "location": "Bayport Terminal",
+        "latitude": 29.6239,
+        "longitude": -95.0119,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bpt_wharf_3.jpg"
+      },
+      {
+        "id": "bpt-wharf-2",
+        "name": "BPT Wharf 2",
+        "group": "Container Crane",
+        "location": "Bayport Terminal",
+        "latitude": 29.6237,
+        "longitude": -95.0121,
+        "baseSnapshotUrl": "https://info.porthouston.com/vtraffic/gateimages/bpt_wharf_2.jpg"
+      }
+    ]
+  }
+]
