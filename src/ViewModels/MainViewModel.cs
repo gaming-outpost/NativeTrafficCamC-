@@ -77,8 +77,6 @@ public partial class MainViewModel : ObservableObject, IDisposable
 
     // ── System Monitor ────────────────────────────────────────────────
     public int OnlineCameraCount => CameraCount;
-    public int WarnCameraCount   => 0;
-    public int OfflineCameraCount => 0;
     /// <summary>Pixel width of the auto-refresh progress fill (based on ~166px usable track width).</summary>
     public double RefreshProgressWidth => (180 - _refreshCountdown) / 180.0 * 166.0;
     public ObservableCollection<string> EventLog { get; } = [];

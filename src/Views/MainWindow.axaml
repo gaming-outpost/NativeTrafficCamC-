@@ -778,16 +778,6 @@
                     <TextBlock Classes="sysmon-text" Text="Online:" />
                     <TextBlock Classes="sysmon-val" Text="{Binding OnlineCameraCount}" />
                   </StackPanel>
-                  <StackPanel Orientation="Horizontal" Spacing="6">
-                    <Ellipse Classes="warn-dot" Width="7" Height="7" VerticalAlignment="Center" />
-                    <TextBlock Classes="sysmon-text" Text="Warning:" />
-                    <TextBlock Classes="sysmon-val" Text="{Binding WarnCameraCount}" />
-                  </StackPanel>
-                  <StackPanel Orientation="Horizontal" Spacing="6">
-                    <Ellipse Classes="off-dot" Width="7" Height="7" VerticalAlignment="Center" />
-                    <TextBlock Classes="sysmon-text" Text="Offline:" />
-                    <TextBlock Classes="sysmon-val" Text="{Binding OfflineCameraCount}" />
-                  </StackPanel>
                 </StackPanel>
               </Border>
 
