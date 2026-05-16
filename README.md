@@ -1,6 +1,6 @@
 # WorldView
 
-A standalone Avalonia desktop application for monitoring Texas traffic cameras, beach cams, border crossing feeds, and live streams. Built with LibVLCSharp + MPV for native video playback and CefGlue (Chromium) for map visualization.
+A standalone Avalonia desktop application for monitoring Texas traffic cameras, beach cams, border crossing feeds, and live streams. Built with LibVLCSharp + MPV for native video playback and Mapsui for native map rendering.
 
 ## Architecture
 
@@ -82,11 +82,7 @@ sudo pacman -S vlc mpv
 
 VLC handles HLS/RTSP streams. MPV is used for the floating camera grid windows via native window embedding.
 
-### 3. CEF (Chromium Embedded Framework)
-
-The project uses `CefGlue.Avalonia` (NuGet) for the Leaflet map WebView. The CEF redistributable (`cef.redist.linux64`) is pulled automatically during `dotnet restore` — no separate system package needed.
-
-### 4. yt-dlp (for YouTube live stream extraction)
+### 3. yt-dlp (for YouTube live stream extraction)
 
 ```bash
 sudo pacman -S yt-dlp
@@ -94,7 +90,7 @@ sudo pacman -S yt-dlp
 
 Only needed for YouTube feeds. All HLS feeds work without it.
 
-### 5. Fonts (optional)
+### 4. Fonts (optional)
 
 ```bash
 paru -S ttf-ibm-plex ttf-rajdhani
@@ -107,7 +103,6 @@ Or download from Google Fonts and drop into `~/.local/share/fonts/`, then run `f
 ```bash
 cd CoastalCommandCenter
 
-# Restore NuGet packages (downloads CEF redist ~200MB on first run)
 dotnet restore
 
 # Build
@@ -115,12 +110,9 @@ dotnet build
 
 # Run
 ./run.sh
-
-# Run without rebuilding (faster for repeated launches)
-./run-fast.sh
 ```
 
-For linker diagnostics during CEF/VLC loading:
+For VLC linker diagnostics:
 
 ```bash
 CCC_ENABLE_LD_DEBUG_LIBS=1 ./run.sh
@@ -182,11 +174,6 @@ All camera data lives in editable JSON files under `Data/`. On first launch thos
 ```
 
 ## Troubleshooting
-
-**CEF / map WebView issues**
-- CEF is bundled via NuGet — no system install needed, but it requires `libglib2`, `libnss`, and standard glibc (all present on Arch/CachyOS by default)
-- If the map is blank, check the terminal for CEF initialization errors
-- The app still works without the map; it shows a placeholder
 
 **"yt-dlp not found" / YouTube feeds fail**
 - `which yt-dlp` and `yt-dlp --version` to verify

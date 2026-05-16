@@ -38,8 +38,4 @@ public class AppSettings
 
     [JsonPropertyName("mpvCacheSecs")]
     public int MpvCacheSecs { get; set; } = 2;
-
-    /// <summary>"Auto", "VlcOnly", or "MpvForYoutube". See <see cref="TileBackend"/>.</summary>
-    [JsonPropertyName("defaultBackend")]
-    public string DefaultBackend { get; set; } = "Auto";
 }
